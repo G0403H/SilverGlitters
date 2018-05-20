@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">Silver Glitters</string>
+    <string name="login">LOGIN TO YOUR ACCOUNT</string>
+    <string name="signup">CREATE YOUR ACCOUNT</string>
+    <string name="alreadyhaveanaccount">Already have an account? Sign in</string>
+    <string name="newaccount">Don\'t have an account? Sign Up</string>
 </resources>
