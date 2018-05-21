@@ -46,28 +46,27 @@
                     android:orientation="horizontal"
                     android:paddingTop="12dp">
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:gravity="center"
-                        android:padding="6dp"
-                        android:text="+91"
-                        android:textColor="#000000"
-                        android:textSize="20sp"
-                        android:textStyle="bold" />
+                    <!--<TextView-->
+                        <!--android:layout_width="wrap_content"-->
+                        <!--android:layout_height="wrap_content"-->
+                        <!--android:gravity="center"-->
+                        <!--android:padding="6dp"-->
+                        <!--android:text="+91"-->
+                        <!--android:textColor="#000000"-->
+                        <!--android:textSize="20sp"-->
+                        <!--android:textStyle="bold" />-->
 
                     <android.support.design.widget.TextInputLayout
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:paddingLeft="12dp">
+                        android:layout_height="wrap_content">
 
                         <AutoCompleteTextView
-                            android:id="@+id/mobile_number"
+                            android:id="@+id/login_email"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:hint="Mobile Number"
+                            android:hint="Email Address"
                             android:textSize="20sp"
-                            android:inputType="numberSigned"
+                            android:inputType="textEmailAddress"
                             android:maxLines="1"
                             android:singleLine="true" />
 
