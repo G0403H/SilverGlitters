@@ -19,8 +19,9 @@
 
         <ImageView
             android:layout_width="match_parent"
-            android:layout_height="300dp"
-            android:id="@+id/card_image"/>
+            android:layout_height="150dp"
+            android:id="@+id/card_image"
+            android:background="#123456"/>
 
         <TextView
             android:layout_width="match_parent"
@@ -42,8 +43,7 @@
             android:textColor="#ffffff"
             android:layout_below="@+id/titlebar"
             android:paddingBottom="8dp"
-            android:paddingTop="8dp"
-            android:layout_alignParentBottom="true"
+            android:paddingTop="2dp"
             android:maxLines="8"/>
 
     </LinearLayout>

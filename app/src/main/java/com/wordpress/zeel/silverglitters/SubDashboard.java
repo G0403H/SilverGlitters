@@ -5,11 +5,11 @@ import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 
-public class Dashboard extends AppCompatActivity {
+public class SubDashboard extends AppCompatActivity {
 
     RecyclerView recyclerView;
     RecyclerView.LayoutManager layoutManager;
-    RecyclerAdapter recyclerAdapter;
+    SubRecyclerAdapter recyclerAdapter;
     GridLayoutManager gridLayoutManager;
 
     @Override
@@ -17,11 +17,11 @@ public class Dashboard extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_dashboard);
 
-        String title[] = {"Necklace", "Ring", "Bikini"};
-        String subtitle[] = {"...", "---", "Oh yeah"};
+        String title[] = {"Strapless Bikini", "Microkini Bikini", "Sling Bikini"};
+        String price[] = {"$25", "$33", "$100"};
 
-        recyclerAdapter = new RecyclerAdapter(title,subtitle,getApplicationContext());
-        gridLayoutManager = new GridLayoutManager(null,2);
+        recyclerAdapter = new SubRecyclerAdapter(title, price, this.getApplicationContext());
+        gridLayoutManager = new GridLayoutManager(null, 2);
         layoutManager = gridLayoutManager;
 
         recyclerView = findViewById(R.id.dashboard_recyclerView);

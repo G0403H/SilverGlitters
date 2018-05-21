@@ -14,15 +14,15 @@ import android.widget.TextView;
 /**
  * Created by Harsh on 12-05-2016.
  */
-public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.RecyclerViewHolder>{
+public class SubRecyclerAdapter extends RecyclerView.Adapter<SubRecyclerAdapter.RecyclerViewHolder>{
 
-    String[] title_names, subtitle_names;
+    String[] title_names, price_names;
     Context context;
 
-    public  RecyclerAdapter(String[] title, String[] subtitle, Context c){
-        this.title_names = title;
-        this.subtitle_names = subtitle;
-        this.context = c;
+    public SubRecyclerAdapter(String[] title, String[] notes, Context c){
+        this.title_names=title;
+        this.price_names =notes;
+        this.context=c;
     }
 
     @Override
@@ -35,7 +35,7 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.Recycl
     @Override
     public void onBindViewHolder(RecyclerViewHolder holder, final int position) {
         holder.text_title.setText(title_names[position]);
-        holder.text_subtitle.setText(subtitle_names[position]);
+        holder.text_subtitle.setText(price_names[position]);
 
         holder.card.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -43,7 +43,7 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.Recycl
 //                Bundle bundle = new Bundle();
 //                bundle.putString("title",title_names[position]);
 //                bundle.putString("note",subtitle_names[position]);
-                Intent i = new Intent(context, SubDashboard.class);
+                Intent i = new Intent(context, DetailActivity.class);
 //                i.putExtras(bundle);
                 i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 context.startActivity(i);

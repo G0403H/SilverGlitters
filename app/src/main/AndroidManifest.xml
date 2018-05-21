@@ -12,18 +12,27 @@
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
 
-        <activity android:name=".LoginActivity">
+        <activity android:name=".LoginActivity" />
+        <activity android:name=".SignupActivity" />
+
+        <activity
+            android:name=".Dashboard"
+            android:label="Dashboard"
+            android:theme="@style/AppTheme2">
         </activity>
 
-        <activity android:name=".SignupActivity"></activity>
+        <activity
+            android:name=".DetailActivity"
+            android:label="@string/title_activity_detail"
+            android:theme="@style/AppTheme" />
 
-
-        <activity android:name=".Dashboard"
-            android:label="Dashboard"></activity>
+        <activity android:name=".SubDashboard"
+            android:theme="@style/AppTheme2"></activity>
     </application>
 
 </manifest>
