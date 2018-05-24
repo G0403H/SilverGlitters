@@ -1,4 +1,4 @@
-package com.wordpress.zeel.silverglitters;
+package com.wordpress.zeel.uploadapp;
 
 
 import android.content.Context;

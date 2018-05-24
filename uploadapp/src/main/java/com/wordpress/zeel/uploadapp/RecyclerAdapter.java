@@ -1,4 +1,4 @@
-package com.wordpress.zeel.silverglitters;
+package com.wordpress.zeel.uploadapp;
 
 
 import android.content.Context;
@@ -19,29 +19,29 @@ import java.util.List;
 /**
  * Created by Harsh on 12-05-2016.
  */
-public class SubRecyclerAdapter extends RecyclerView.Adapter<SubRecyclerAdapter.RecyclerViewHolder>{
+public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.RecyclerViewHolder>{
 
     List<Upload> mUploads;
     Context context;
 
-    public SubRecyclerAdapter(List<Upload> mUploads, Context context) {
-        this.mUploads = mUploads;
-        this.context = context;
+    public RecyclerAdapter(List<Upload> uploads, Context c) {
+        mUploads = uploads;
+        this.context = c;
     }
 
     @Override
     public RecyclerViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.dashboard_card,parent,false);
-        RecyclerViewHolder holder = new RecyclerViewHolder(view);
-        return holder;
+        View view = LayoutInflater.from(context).inflate(R.layout.dashboard_card, parent, false);
+        return new RecyclerViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(RecyclerViewHolder holder, final int position) {
-        holder.text_title.setText(mUploads.get(position).getName());
-        holder.text_subtitle.setText(String.valueOf(mUploads.get(position).getPrice()));
+        final Upload currentUpload = mUploads.get(position);
+
+        holder.text_title.setText(currentUpload.getCategory());
         Picasso.get()
-                .load(mUploads.get(position).getImageURL())
+                .load(currentUpload.getImageURL())
                 .placeholder(R.mipmap.ic_launcher_round)
                 .fit()
                 .centerCrop()
@@ -51,11 +51,9 @@ public class SubRecyclerAdapter extends RecyclerView.Adapter<SubRecyclerAdapter.
             @Override
             public void onClick(View v) {
                 Bundle bundle = new Bundle();
-                bundle.putString("Subcategory_title", mUploads.get(position).getName());
-                bundle.putString("Subcategory_imageURL", mUploads.get(position).getImageURL());
-                bundle.putDouble("Subcategory_price", mUploads.get(position).getPrice());
+                bundle.putString("Category_title", currentUpload.getCategory());
 
-                Intent i = new Intent(context, DetailActivity.class);
+                Intent i = new Intent(context, SubDashboard.class);
                 i.putExtras(bundle);
                 i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 context.startActivity(i);
@@ -71,16 +69,14 @@ public class SubRecyclerAdapter extends RecyclerView.Adapter<SubRecyclerAdapter.
     public class RecyclerViewHolder extends RecyclerView.ViewHolder{
 
         ImageView img_image;
-        TextView text_title,text_subtitle;
+        TextView text_title;
         CardView card;
 
         public RecyclerViewHolder(View v) {
             super(v);
             img_image = (ImageView)v.findViewById(R.id.card_image);
             text_title = (TextView)v.findViewById(R.id.card_title);
-            text_subtitle = (TextView)v.findViewById(R.id.card_subtitle);
             card = (CardView)v.findViewById(R.id.card_view);
-
         }
     }
 }

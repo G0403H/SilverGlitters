@@ -1,8 +1,10 @@
 package com.wordpress.zeel.silverglitters;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.CardView;
 import android.util.Patterns;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -25,7 +27,7 @@ import java.util.concurrent.TimeUnit;
 public class SignupActivity extends AppCompatActivity {
 
     private EditText editTextName, editTextEmail, editTextPassword, editTextPhone,editTextCode;
-
+    CardView cardView;
     private Button signupbutton,verifybutton,resendbutton;
 
     private FirebaseAuth mAuth;
@@ -44,20 +46,70 @@ public class SignupActivity extends AppCompatActivity {
         signupbutton = findViewById(R.id.signupbutton);
         verifybutton = findViewById(R.id.button_verify);
         resendbutton = findViewById(R.id.button_resend);
+        cardView = findViewById(R.id.cardView_verify);
 
-        editTextCode.setVisibility(View.INVISIBLE);
-        verifybutton.setVisibility(View.INVISIBLE);
-        resendbutton.setVisibility(View.INVISIBLE);
-
+        cardView.setVisibility(View.INVISIBLE);
         mAuth = FirebaseAuth.getInstance();
 
         signupbutton.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View view) {
+
+                final String name = editTextName.getText().toString().trim();
+                final String email = editTextEmail.getText().toString().trim();
+                final String password = editTextPassword.getText().toString().trim();
+                final String phone = editTextPhone.getText().toString().trim();
+
+
+                if (name.isEmpty()) {
+                    editTextName.setError(getString(R.string.input_error_name));
+                    editTextName.requestFocus();
+                    return;
+                }
+
+                if (email.isEmpty()) {
+                    editTextEmail.setError(getString(R.string.input_error_email));
+                    editTextEmail.requestFocus();
+                    return;
+                }
+
+                if (!Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
+                    editTextEmail.setError(getString(R.string.input_error_email_invalid));
+                    editTextEmail.requestFocus();
+                    return;
+                }
+
+                if (password.isEmpty()) {
+                    editTextPassword.setError(getString(R.string.input_error_password));
+                    editTextPassword.requestFocus();
+                    return;
+                }
+
+                if (password.length() < 6) {
+                    editTextPassword.setError(getString(R.string.input_error_password_length));
+                    editTextPassword.requestFocus();
+                    return;
+                }
+
+                if (phone.isEmpty()) {
+                    editTextPhone.setError(getString(R.string.input_error_phone));
+                    editTextPhone.requestFocus();
+                    return;
+                }
+
+                if (phone.length() != 10) {
+                    editTextPhone.setError(getString(R.string.input_error_phone_invalid));
+                    editTextPhone.requestFocus();
+                    return;
+                }
+
+
                 sendVerificationCode();
-                resendbutton.setVisibility(View.VISIBLE);
-                verifybutton.setVisibility(View.VISIBLE);
-                editTextCode.setVisibility(View.VISIBLE);
+                cardView.setVisibility(View.VISIBLE);
+                editTextPhone.setEnabled(false);
+                editTextName.setEnabled(false);
+                editTextEmail.setEnabled(false);
+                editTextPassword.setEnabled(false);
                 //verifySignInCode();
                    // registerUser();
             }
@@ -113,7 +165,7 @@ public class SignupActivity extends AppCompatActivity {
             return;
         }
 
-        if(phone.length() < 10 ){
+        if(phone.length() != 10 ){
             editTextPhone.setError("Please enter a valid phone");
             editTextPhone.requestFocus();
             return;
@@ -170,48 +222,6 @@ public class SignupActivity extends AppCompatActivity {
         final String password = editTextPassword.getText().toString().trim();
         final String phone = editTextPhone.getText().toString().trim();
 
-        if (name.isEmpty()) {
-            editTextName.setError(getString(R.string.input_error_name));
-            editTextName.requestFocus();
-            return;
-        }
-
-        if (email.isEmpty()) {
-            editTextEmail.setError(getString(R.string.input_error_email));
-            editTextEmail.requestFocus();
-            return;
-        }
-
-        if (!Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
-            editTextEmail.setError(getString(R.string.input_error_email_invalid));
-            editTextEmail.requestFocus();
-            return;
-        }
-
-        if (password.isEmpty()) {
-            editTextPassword.setError(getString(R.string.input_error_password));
-            editTextPassword.requestFocus();
-            return;
-        }
-
-        if (password.length() < 6) {
-            editTextPassword.setError(getString(R.string.input_error_password_length));
-            editTextPassword.requestFocus();
-            return;
-        }
-
-        if (phone.isEmpty()) {
-            editTextPhone.setError(getString(R.string.input_error_phone));
-            editTextPhone.requestFocus();
-            return;
-        }
-
-        if (phone.length() != 10) {
-            editTextPhone.setError(getString(R.string.input_error_phone_invalid));
-            editTextPhone.requestFocus();
-            return;
-        }
-
 
 
         mAuth.createUserWithEmailAndPassword(email, password)
@@ -228,13 +238,16 @@ public class SignupActivity extends AppCompatActivity {
                                     password
                             );
 
-                            FirebaseDatabase.getInstance().getReference("Users")
+                            FirebaseDatabase.getInstance().getReference("users")
                                     .child(FirebaseAuth.getInstance().getCurrentUser().getUid())
                                     .setValue(user).addOnCompleteListener(new OnCompleteListener<Void>() {
                                 @Override
                                 public void onComplete(@NonNull Task<Void> task) {
                                     if (task.isSuccessful()) {
                                         Toast.makeText(SignupActivity.this, getString(R.string.registration_success), Toast.LENGTH_LONG).show();
+                                        Intent intent = new Intent(SignupActivity.this,Dashboard.class);
+                                        startActivity(intent);
+                                        finish();
                                     } else {
                                         Toast.makeText(SignupActivity.this,task.getException().getMessage(),Toast.LENGTH_SHORT).show();
                                     }

@@ -1,4 +1,4 @@
-package com.wordpress.zeel.silverglitters;
+package com.wordpress.zeel.uploadapp;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -31,7 +31,7 @@ public class SubDashboard extends AppCompatActivity {
     List<Upload> mUploads;
 
 
-    String categoryName;
+    java.lang.String categoryName;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
