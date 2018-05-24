@@ -3,6 +3,7 @@ package com.wordpress.zeel.silverglitters;
 
 import android.content.Context;
 import android.content.Intent;
+import android.os.Bundle;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -40,11 +41,11 @@ public class SubRecyclerAdapter extends RecyclerView.Adapter<SubRecyclerAdapter.
         holder.card.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                Bundle bundle = new Bundle();
-//                bundle.putString("title",title_names[position]);
+                Bundle bundle = new Bundle();
+                bundle.putString("Subcategory_title", title_names[position]);
 //                bundle.putString("note",subtitle_names[position]);
                 Intent i = new Intent(context, DetailActivity.class);
-//                i.putExtras(bundle);
+                i.putExtras(bundle);
                 i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 context.startActivity(i);
             }

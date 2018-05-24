@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
+
+    <group>
+        <item
+            android:title="Contact us"
+            android:id="@+id/menu_contact_us" />
+
+        <item
+            android:title="About"
+            android:id="@+id/menu_about" />
+    </group>
+
+    <item
+        android:title="Logout"
+        android:id="@+id/menu_logout" />
+
+
+</menu>

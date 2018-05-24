@@ -3,11 +3,15 @@ package com.wordpress.zeel.silverglitters;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
+import android.widget.Toast;
 
 public class DetailActivity extends AppCompatActivity {
+
+    String subCategoryName;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -15,6 +19,13 @@ public class DetailActivity extends AppCompatActivity {
         setContentView(R.layout.activity_detail);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+        Bundle bundle = getIntent().getExtras();
+        if (bundle != null) {
+            ActionBar actionBar = getSupportActionBar();
+            subCategoryName = bundle.getString("Subcategory_title");
+            actionBar.setTitle(subCategoryName);
+        }
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -24,5 +35,7 @@ public class DetailActivity extends AppCompatActivity {
                         .setAction("Action", null).show();
             }
         });
+
+
     }
 }

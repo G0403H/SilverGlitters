@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "83128420857",
+    "firebase_url": "https://silver-glitters.firebaseio.com",
+    "project_id": "silver-glitters",
+    "storage_bucket": "silver-glitters.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:83128420857:android:33944da3f63907be",
+        "android_client_info": {
+          "package_name": "com.wordpress.zeel.silverglitters"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "83128420857-u491u135mfh1u87p66fptihkb0lppuvp.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAkWwOm1Bn1Z1y5gi5jMn21EnZejZMVeTs"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
