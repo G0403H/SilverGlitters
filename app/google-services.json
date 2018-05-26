@@ -15,6 +15,54 @@
       },
       "oauth_client": [
         {
+          "client_id": "1088013675515-m1cfop5g05jluuutc5lbu2a2hg32d9hf.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.wordpress.zeel.silverglitters",
+            "certificate_hash": "f730a624816a48d42fe7245c21d078ab3daf428b"
+          }
+        },
+        {
+          "client_id": "1088013675515-ai4ie08cloni1riim2bm905q48tlc8vi.apps.googleusercontent.com",
+          "client_type": 3
+        },
+        {
+          "client_id": "1088013675515-ai4ie08cloni1riim2bm905q48tlc8vi.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAyfFlOqQSxZbvYy8QRdoxD2mAPnjY7wlQ"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1088013675515-ai4ie08cloni1riim2bm905q48tlc8vi.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1088013675515:android:7e4bd121ea83b925",
+        "android_client_info": {
+          "package_name": "com.wordpress.zeel.uploadapp"
+        }
+      },
+      "oauth_client": [
+        {
           "client_id": "1088013675515-ai4ie08cloni1riim2bm905q48tlc8vi.apps.googleusercontent.com",
           "client_type": 3
         },

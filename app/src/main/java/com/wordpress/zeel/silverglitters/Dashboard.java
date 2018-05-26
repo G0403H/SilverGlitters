@@ -3,19 +3,17 @@ package com.wordpress.zeel.silverglitters;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
-import android.support.v7.widget.GridLayoutManager;
-import android.support.v7.widget.RecyclerView;
-import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.GridLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
@@ -56,15 +54,24 @@ public class Dashboard extends AppCompatActivity implements NavigationView.OnNav
         recyclerAdapter = new RecyclerAdapter(mUploads, getApplicationContext());
         recyclerView.setAdapter(recyclerAdapter);
 
-        mDatabaseRef = FirebaseDatabase.getInstance().getReference("categories");
+        mDatabaseRef = FirebaseDatabase.getInstance().getReference("uploads");
         mDBListener = mDatabaseRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
-                    Upload upload = snapshot.getValue(Upload.class);
-                    mUploads.add(upload);
-                }
+                mUploads.clear();
 
+                for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+                    Upload upload = null;
+
+                    for(DataSnapshot subSnapshot : snapshot.getChildren()){
+                        upload = subSnapshot.getValue(Upload.class);
+                        break;
+                    }
+
+                    if(upload != null)
+                        mUploads.add(upload);
+                }
+                //Toast.makeText(Dashboard.this,""+mUploads.size(),Toast.LENGTH_SHORT).show();
                 // updates recyclerView every time there is a change in Database
                 recyclerAdapter.notifyDataSetChanged();
 

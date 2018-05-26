@@ -1,5 +1,6 @@
 package com.wordpress.zeel.silverglitters;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -105,7 +106,7 @@ public class SignupActivity extends AppCompatActivity {
 
 
                 sendVerificationCode();
-                cardView.setVisibility(View.VISIBLE);
+               // cardView.setVisibility(View.VISIBLE);
                 editTextPhone.setEnabled(false);
                 editTextName.setEnabled(false);
                 editTextEmail.setEnabled(false);
@@ -171,7 +172,7 @@ public class SignupActivity extends AppCompatActivity {
             return;
         }
 
-
+        //Toast.makeText(SignupActivity.this,phone,Toast.LENGTH_SHORT).show();
         PhoneAuthProvider.getInstance().verifyPhoneNumber(
                 phone,        // Phone number to verify
                 60,                 // Timeout duration
@@ -184,7 +185,8 @@ public class SignupActivity extends AppCompatActivity {
 
         @Override
         public void onVerificationCompleted(PhoneAuthCredential phoneAuthCredential) {
-
+            //Toast.makeText(SignupActivity.this,"holla",Toast.LENGTH_SHORT).show();
+            registerUser();
         }
 
         @Override
@@ -200,6 +202,7 @@ public class SignupActivity extends AppCompatActivity {
         public void onCodeSent(String s, PhoneAuthProvider.ForceResendingToken forceResendingToken) {
             super.onCodeSent(s, forceResendingToken);
 
+            cardView.setVisibility(View.VISIBLE);
             codeSent = s;
             token=forceResendingToken;
         }
@@ -222,7 +225,7 @@ public class SignupActivity extends AppCompatActivity {
         final String password = editTextPassword.getText().toString().trim();
         final String phone = editTextPhone.getText().toString().trim();
 
-
+        final ProgressDialog dialog = ProgressDialog.show(SignupActivity.this,"Signing Up...","",true);
 
         mAuth.createUserWithEmailAndPassword(email, password)
                 .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
@@ -243,6 +246,7 @@ public class SignupActivity extends AppCompatActivity {
                                     .setValue(user).addOnCompleteListener(new OnCompleteListener<Void>() {
                                 @Override
                                 public void onComplete(@NonNull Task<Void> task) {
+                                    dialog.dismiss();
                                     if (task.isSuccessful()) {
                                         Toast.makeText(SignupActivity.this, getString(R.string.registration_success), Toast.LENGTH_LONG).show();
                                         Intent intent = new Intent(SignupActivity.this,Dashboard.class);
