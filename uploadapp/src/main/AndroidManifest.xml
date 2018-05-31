@@ -2,8 +2,9 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.wordpress.zeel.uploadapp">
 
-    <uses-permission android:name="android.permission.INTERNET"/>
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.CALL_PHONE" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 
     <application
         android:allowBackup="true"
@@ -12,12 +13,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".MainActivity">
-        </activity>
 
         <activity
             android:name=".Dashboard"
-            android:label="Dashboard"
             android:theme="@style/AppTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -32,8 +30,10 @@
             android:name=".DetailActivity"
             android:theme="@style/AppTheme" />
 
+        <activity android:name=".UploadActivity" />
         <activity android:name=".AboutUs" />
-        <activity android:name=".ContactUs"></activity>
+        <activity android:name=".ContactUs" />
+        <activity android:name=".UserActivity" android:theme="@style/AppTheme2" android:label="User Details"></activity>
     </application>
 
 </manifest>

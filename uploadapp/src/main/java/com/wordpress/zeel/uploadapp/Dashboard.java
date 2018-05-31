@@ -11,6 +11,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -50,11 +51,11 @@ public class Dashboard extends AppCompatActivity implements NavigationView.OnNav
         recyclerView.setLayoutManager(new GridLayoutManager(null, 2));
 
         mUploads = new ArrayList<>();
+        mDatabaseRef = FirebaseDatabase.getInstance().getReference("uploads");
 
-        recyclerAdapter = new RecyclerAdapter(mUploads, getApplicationContext());
+        recyclerAdapter = new RecyclerAdapter(mUploads, getApplicationContext(), mDatabaseRef);
         recyclerView.setAdapter(recyclerAdapter);
 
-        mDatabaseRef = FirebaseDatabase.getInstance().getReference("uploads");
         mDBListener = mDatabaseRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
@@ -63,15 +64,15 @@ public class Dashboard extends AppCompatActivity implements NavigationView.OnNav
                 for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
                     Upload upload = null;
 
-                    for(DataSnapshot subSnapshot : snapshot.getChildren()){
+                    for (DataSnapshot subSnapshot : snapshot.getChildren()) {
                         upload = subSnapshot.getValue(Upload.class);
                         break;
                     }
 
-                    if(upload != null)
+                    if (upload != null)
                         mUploads.add(upload);
                 }
-                //Toast.makeText(Dashboard.this,""+mUploads.size(),Toast.LENGTH_SHORT).show();
+
                 // updates recyclerView every time there is a change in Database
                 recyclerAdapter.notifyDataSetChanged();
 
@@ -94,6 +95,60 @@ public class Dashboard extends AppCompatActivity implements NavigationView.OnNav
 
         NavigationView navigationView = findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+    }
+
+//    @Override
+//    public boolean onCreateOptionsMenu(Menu menu) {
+//        // Inflate the menu; this adds items to the action bar if it is present.
+//        getMenuInflater().inflate(R.menu.navigation_drawer, menu);
+//        return true;
+//    }
+//
+//    @Override
+//    public boolean onOptionsItemSelected(MenuItem item) {
+//        // Handle action bar item clicks here. The action bar will
+//        // automatically handle clicks on the Home/Up button, so long
+//        // as you specify a parent activity in AndroidManifest.xml.
+//        int id = item.getItemId();
+//
+//        //noinspection SimplifiableIfStatement
+//        if (id == R.id.action_upload) {
+//            Intent intent = new Intent(Dashboard.this,UploadActivity.class);
+//            startActivity(intent);
+//            return true;
+//        }
+//
+//        return super.onOptionsItemSelected(item);
+//    }
+
+    @SuppressWarnings("StatementWithEmptyBody")
+    @Override
+    public boolean onNavigationItemSelected(MenuItem item) {
+        // Handle navigation view item clicks here.
+        int id = item.getItemId();
+        Intent intent = null;
+
+        if (id == R.id.action_upload) {
+            intent = new Intent(this, UploadActivity.class);
+        } else if (id == R.id.action_users) {
+            intent = new Intent(this, UserActivity.class);
+        } else if (id == R.id.menu_contact_us) {
+            intent = new Intent(this, ContactUs.class);
+        } else if (id == R.id.menu_about) {
+            intent = new Intent(this, AboutUs.class);
+        } else if (id == R.id.menu_logout) {
+            // Logout from the system (NOT FOR ADMIN)
+            // intent = new Intent(this, LoginActivity.class);
+        }
+
+        if (intent != null) {
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            startActivity(intent);
+        }
+
+        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        drawer.closeDrawer(GravityCompat.START);
+        return true;
     }
 
     boolean exit = false;
@@ -119,56 +174,6 @@ public class Dashboard extends AppCompatActivity implements NavigationView.OnNav
             }, 3 * 1000);
 
         }
-    }
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.navigation_drawer, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_upload) {
-            Intent intent = new Intent(Dashboard.this,MainActivity.class);
-            startActivity(intent);
-            return true;
-        }
-
-        return super.onOptionsItemSelected(item);
-    }
-
-    @SuppressWarnings("StatementWithEmptyBody")
-    @Override
-    public boolean onNavigationItemSelected(MenuItem item) {
-        // Handle navigation view item clicks here.
-        int id = item.getItemId();
-        Intent intent = null;
-
-        if (id == R.id.menu_contact_us) {
-            intent = new Intent(this, ContactUs.class);
-        } else if (id == R.id.menu_about) {
-            intent = new Intent(this, AboutUs.class);
-        } else if (id == R.id.menu_logout) {
-            // Logout from the system
-            //intent = new Intent(this, LoginActivity.class);
-        }
-
-        if(intent!=null){
-            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-            startActivity(intent);
-        }
-
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-        drawer.closeDrawer(GravityCompat.START);
-        return true;
     }
 
     @Override

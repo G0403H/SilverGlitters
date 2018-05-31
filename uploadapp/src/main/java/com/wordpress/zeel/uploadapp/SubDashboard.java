@@ -52,11 +52,11 @@ public class SubDashboard extends AppCompatActivity {
         recyclerView.setHasFixedSize(true);
 
         mUploads = new ArrayList<>();
+        mDatabaseRef = FirebaseDatabase.getInstance().getReference("uploads").child(categoryName);
 
-        recyclerAdapter = new SubRecyclerAdapter(mUploads, this.getApplicationContext());
+        recyclerAdapter = new SubRecyclerAdapter(mUploads, this.getApplicationContext(), mDatabaseRef);
         recyclerView.setAdapter(recyclerAdapter);
 
-        mDatabaseRef = FirebaseDatabase.getInstance().getReference("uploads").child(categoryName);
         mDBListener = mDatabaseRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
@@ -64,6 +64,7 @@ public class SubDashboard extends AppCompatActivity {
 
                 for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
                     Upload upload = snapshot.getValue(Upload.class);
+                    upload.setKey(snapshot.getKey());
                     mUploads.add(upload);
                 }
 
