@@ -40,8 +40,8 @@
             android:name=".DetailActivity"
             android:theme="@style/AppTheme" />
 
-        <activity android:name=".AboutUs" />
-        <activity android:name=".ContactUs"></activity>
+        <activity android:name=".AboutUs" android:theme="@style/AppTheme2"/>
+        <activity android:name=".ContactUs" android:theme="@style/AppTheme2"/>
     </application>
 
 </manifest>

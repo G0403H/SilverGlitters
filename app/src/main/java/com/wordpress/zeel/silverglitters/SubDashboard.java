@@ -64,6 +64,7 @@ public class SubDashboard extends AppCompatActivity {
 
                 for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
                     Upload upload = snapshot.getValue(Upload.class);
+                    upload.setKey(snapshot.getKey());
                     mUploads.add(upload);
                 }
 

@@ -1,6 +1,8 @@
-package com.wordpress.zeel.silverglitters;
+package com.wordpress.zeel.uploadapp;
 
 import com.google.firebase.database.Exclude;
+
+import java.util.Comparator;
 
 public class User {
 
@@ -17,7 +19,6 @@ public class User {
         this.email=email;
         this.phone=phone;
         this.password=password;
-        isDisabled = false;
     }
 
     public boolean isDisabled() {

@@ -121,6 +121,7 @@ public class Dashboard extends AppCompatActivity implements NavigationView.OnNav
         }
     }
 
+/*
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
@@ -142,6 +143,7 @@ public class Dashboard extends AppCompatActivity implements NavigationView.OnNav
 
         return super.onOptionsItemSelected(item);
     }
+    */
 
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
