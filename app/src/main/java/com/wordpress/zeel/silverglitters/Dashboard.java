@@ -11,12 +11,13 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
-import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -31,7 +32,8 @@ public class Dashboard extends AppCompatActivity implements NavigationView.OnNav
     ProgressBar mProgressCircle;
     RecyclerView recyclerView;
     RecyclerAdapter recyclerAdapter;
-
+    TextView username;
+    FirebaseAuth mAuth;
     DatabaseReference mDatabaseRef;
     ValueEventListener mDBListener;
     List<Upload> mUploads;
@@ -49,10 +51,26 @@ public class Dashboard extends AppCompatActivity implements NavigationView.OnNav
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new GridLayoutManager(null, 2));
 
+        username = findViewById(R.id.user_name);
         mUploads = new ArrayList<>();
 
         recyclerAdapter = new RecyclerAdapter(mUploads, getApplicationContext());
         recyclerView.setAdapter(recyclerAdapter);
+
+        mAuth = FirebaseAuth.getInstance();
+//        String uid = mAuth.getCurrentUser().getUid();
+//        FirebaseDatabase.getInstance().getReference("users").child(uid).child("name")
+//                .addListenerForSingleValueEvent(new ValueEventListener() {
+//                    @Override
+//                    public void onDataChange(DataSnapshot dataSnapshot) {
+//                        username.setText(dataSnapshot.getValue(String.class));
+//                    }
+//
+//                    @Override
+//                    public void onCancelled(DatabaseError databaseError) {
+//
+//                    }
+//                });
 
         mDatabaseRef = FirebaseDatabase.getInstance().getReference("uploads");
         mDBListener = mDatabaseRef.addValueEventListener(new ValueEventListener() {
@@ -71,8 +89,7 @@ public class Dashboard extends AppCompatActivity implements NavigationView.OnNav
                     if(upload != null)
                         mUploads.add(upload);
                 }
-                //Toast.makeText(Dashboard.this,""+mUploads.size(),Toast.LENGTH_SHORT).show();
-                // updates recyclerView every time there is a change in Database
+
                 recyclerAdapter.notifyDataSetChanged();
 
                 mProgressCircle.setVisibility(View.INVISIBLE);
@@ -121,27 +138,29 @@ public class Dashboard extends AppCompatActivity implements NavigationView.OnNav
         }
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.navigation_drawer, menu);
-        return true;
-    }
+//    @Override
+//    public boolean onCreateOptionsMenu(Menu menu) {
+//        // Inflate the menu; this adds items to the action bar if it is present.
+//        getMenuInflater().inflate(R.menu.navigation_drawer, menu);
+//        return true;
+//    }
+//
+//    @Override
+//    public boolean onOptionsItemSelected(MenuItem item) {
+//        // Handle action bar item clicks here. The action bar will
+//        // automatically handle clicks on the Home/Up button, so long
+//        // as you specify a parent activity in AndroidManifest.xml.
+//        int id = item.getItemId();
+//
+//        //noinspection SimplifiableIfStatement
+//        if (id == R.id.action_refresh) {
+//            return true;
+//        }
+//
+//        return super.onOptionsItemSelected(item);
+//    }
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
 
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_refresh) {
-            return true;
-        }
-
-        return super.onOptionsItemSelected(item);
-    }
 
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
@@ -152,15 +171,25 @@ public class Dashboard extends AppCompatActivity implements NavigationView.OnNav
 
         if (id == R.id.menu_contact_us) {
             intent = new Intent(this, ContactUs.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            startActivity(intent);
         } else if (id == R.id.menu_about) {
             intent = new Intent(this, AboutUs.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            startActivity(intent);
         } else if (id == R.id.menu_logout) {
             // Logout from the system
-            intent = new Intent(this, LoginActivity.class);
+            if (mAuth!=null){
+                mAuth.signOut();
+                intent = new Intent(this, LoginActivity.class);
+                startActivity(intent);
+                finish();
+            }
+
         }
 
-        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-        startActivity(intent);
+        //intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);

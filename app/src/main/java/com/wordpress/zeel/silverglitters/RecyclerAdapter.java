@@ -31,7 +31,7 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.Recycl
 
     @Override
     public RecyclerViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(context).inflate(R.layout.dashboard_card, parent, false);
+        View view = LayoutInflater.from(context).inflate(R.layout.dashboard_card_2, parent, false);
         return new RecyclerViewHolder(view);
     }
 

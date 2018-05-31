@@ -111,8 +111,6 @@ public class SignupActivity extends AppCompatActivity {
                 editTextName.setEnabled(false);
                 editTextEmail.setEnabled(false);
                 editTextPassword.setEnabled(false);
-                //verifySignInCode();
-                   // registerUser();
             }
         });
 
@@ -259,6 +257,11 @@ public class SignupActivity extends AppCompatActivity {
                             });
 
                         } else {
+                            dialog.dismiss();
+                            editTextPhone.setEnabled(true);
+                            editTextName.setEnabled(true);
+                            editTextEmail.setEnabled(true);
+                            editTextPassword.setEnabled(true);
                             Toast.makeText(SignupActivity.this, task.getException().getMessage(), Toast.LENGTH_LONG).show();
                         }
                     }

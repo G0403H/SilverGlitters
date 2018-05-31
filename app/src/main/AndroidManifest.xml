@@ -3,6 +3,7 @@
     package="com.wordpress.zeel.silverglitters">
 
     <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.CALL_PHONE"/>
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -12,7 +13,7 @@
 
         <activity
             android:name=".MainActivity"
-            android:theme="@style/AppTheme">
+            android:theme="@style/FullScreenTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -22,10 +23,10 @@
 
         <activity
             android:name=".LoginActivity"
-            android:theme="@style/AppTheme" />
+            android:theme="@style/NoActionBar" />
         <activity
             android:name=".SignupActivity"
-            android:theme="@style/AppTheme" />
+            android:theme="@style/NoActionBar" />
 
         <activity
             android:name=".Dashboard"
@@ -38,10 +39,14 @@
             android:theme="@style/AppTheme2" />
         <activity
             android:name=".DetailActivity"
-            android:theme="@style/AppTheme" />
+            android:theme="@style/FullScreenTheme" />
 
-        <activity android:name=".AboutUs" />
-        <activity android:name=".ContactUs"></activity>
+        <activity android:name=".AboutUs"
+            android:theme="@style/NoActionBar"/>
+        <activity android:name=".ContactUs"
+            android:theme="@style/NoActionBar">
+
+        </activity>
     </application>
 
 </manifest>
