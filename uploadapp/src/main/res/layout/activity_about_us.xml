@@ -9,126 +9,126 @@
     android:orientation="vertical"
     tools:context=".AboutUs">
 
-    <!--<LinearLayout-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:orientation="vertical"-->
-        <!--android:paddingTop="12dp">-->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:paddingTop="12dp">
 
-        <!--<TextView-->
-            <!--android:id="@+id/header"-->
-            <!--android:layout_width="match_parent"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:layout_marginBottom="8dp"-->
-            <!--android:layout_marginTop="8dp"-->
-            <!--android:gravity="center"-->
-            <!--android:padding="6dp"-->
-            <!--android:text="Developers"-->
-            <!--android:textColor="#ff171717"-->
-            <!--android:textSize="20sp" />-->
+        <TextView
+            android:id="@+id/header"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:layout_marginTop="8dp"
+            android:gravity="center"
+            android:padding="6dp"
+            android:text="Developers"
+            android:textColor="#ff171717"
+            android:textSize="20sp" />
 
 
-        <!--<LinearLayout-->
-            <!--android:layout_width="match_parent"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:orientation="vertical"-->
-            <!--android:paddingLeft="12dp"-->
-            <!--android:paddingRight="12dp">-->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingLeft="12dp"
+            android:paddingRight="12dp">
 
-            <!--<android.support.v7.widget.CardView-->
-                <!--android:layout_width="match_parent"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--android:layout_margin="12dp"-->
-                <!--android:padding="6dp"-->
-                <!--card_view:cardBackgroundColor="#ffffff"-->
-                <!--card_view:cardCornerRadius="6dp"-->
-                <!--card_view:cardElevation="3dp">-->
+            <android.support.v7.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="12dp"
+                android:padding="6dp"
+                card_view:cardBackgroundColor="#ffffff"
+                card_view:cardCornerRadius="6dp"
+                card_view:cardElevation="3dp">
 
-                <!--<LinearLayout-->
-                    <!--android:layout_width="wrap_content"-->
-                    <!--android:layout_height="wrap_content"-->
-                    <!--android:orientation="vertical">-->
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
 
-                    <!--<de.hdodenhof.circleimageview.CircleImageView-->
-                        <!--android:layout_width="match_parent"-->
-                        <!--android:layout_height="205dp"-->
-                        <!--android:padding="12dp"-->
-                        <!--android:src="@drawable/profile_jeel.jpg"-->
-                        <!--app:civ_border_color="#ff000000"-->
-                        <!--app:civ_border_width="2dp" />-->
+                    <de.hdodenhof.circleimageview.CircleImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="205dp"
+                        android:padding="12dp"
+                        android:src="@drawable/profile_jeel"
+                        app:civ_border_color="#ff000000"
+                        app:civ_border_width="2dp" />
 
-                    <!--<TextView-->
-                        <!--android:layout_width="match_parent"-->
-                        <!--android:layout_height="wrap_content"-->
-                        <!--android:gravity="center"-->
-                        <!--android:padding="8dp"-->
-                        <!--android:text="Jeel Santoki"-->
-                        <!--android:textColor="#ff000000"-->
-                        <!--android:textSize="20sp"-->
-                        <!--android:textStyle="bold"-->
-                        <!--android:typeface="serif" />-->
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:padding="8dp"
+                        android:text="Jeel Santoki"
+                        android:textColor="#ff000000"
+                        android:textSize="20sp"
+                        android:textStyle="bold"
+                        android:typeface="serif" />
 
-                    <!--<TextView-->
-                        <!--android:id="@+id/email_j"-->
-                        <!--android:layout_width="match_parent"-->
-                        <!--android:layout_height="wrap_content"-->
-                        <!--android:gravity="center"-->
-                        <!--android:linksClickable="true"-->
-                        <!--android:padding="8dp"-->
-                        <!--android:text="@string/email_j"-->
-                        <!--android:textColor="#ff000000"-->
-                        <!--android:textSize="16sp"-->
-                        <!--android:typeface="serif" />-->
-                <!--</LinearLayout>-->
-            <!--</android.support.v7.widget.CardView>-->
+                    <TextView
+                        android:id="@+id/email_j"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:linksClickable="true"
+                        android:padding="8dp"
+                        android:text="@string/email_j"
+                        android:textColor="#ff000000"
+                        android:textSize="16sp"
+                        android:typeface="serif" />
+                </LinearLayout>
+            </android.support.v7.widget.CardView>
 
-            <!--<android.support.v7.widget.CardView-->
-                <!--android:layout_width="match_parent"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--android:layout_margin="12dp"-->
-                <!--android:padding="6dp"-->
-                <!--card_view:cardBackgroundColor="#ffffff"-->
-                <!--card_view:cardCornerRadius="6dp"-->
-                <!--card_view:cardElevation="3dp">-->
+            <android.support.v7.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="12dp"
+                android:padding="6dp"
+                card_view:cardBackgroundColor="#ffffff"
+                card_view:cardCornerRadius="6dp"
+                card_view:cardElevation="3dp">
 
-                <!--<LinearLayout-->
-                    <!--android:layout_width="wrap_content"-->
-                    <!--android:layout_height="wrap_content"-->
-                    <!--android:orientation="vertical">-->
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
 
-                    <!--<de.hdodenhof.circleimageview.CircleImageView-->
-                        <!--android:layout_width="match_parent"-->
-                        <!--android:layout_height="205dp"-->
-                        <!--android:padding="12dp"-->
-                        <!--android:src="@drawable/profile_vasoya1.jpg"-->
-                        <!--app:civ_border_color="#ff000000"-->
-                        <!--app:civ_border_width="2dp" />-->
+                    <de.hdodenhof.circleimageview.CircleImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="205dp"
+                        android:padding="12dp"
+                        android:src="@drawable/profile_vasoya1"
+                        app:civ_border_color="#ff000000"
+                        app:civ_border_width="2dp" />
 
-                    <!--<TextView-->
-                        <!--android:layout_width="match_parent"-->
-                        <!--android:layout_height="wrap_content"-->
-                        <!--android:gravity="center"-->
-                        <!--android:padding="8dp"-->
-                        <!--android:text="Harsh Vasoya"-->
-                        <!--android:textColor="#ff000000"-->
-                        <!--android:textSize="20sp"-->
-                        <!--android:textStyle="bold"-->
-                        <!--android:typeface="serif" />-->
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:padding="8dp"
+                        android:text="Harsh Vasoya"
+                        android:textColor="#ff000000"
+                        android:textSize="20sp"
+                        android:textStyle="bold"
+                        android:typeface="serif" />
 
-                    <!--<TextView-->
-                        <!--android:id="@+id/email_h"-->
-                        <!--android:layout_width="match_parent"-->
-                        <!--android:layout_height="wrap_content"-->
-                        <!--android:gravity="center"-->
-                        <!--android:linksClickable="true"-->
-                        <!--android:padding="8dp"-->
-                        <!--android:text="@string/email_h"-->
-                        <!--android:textColor="#ff000000"-->
-                        <!--android:textSize="16sp"-->
-                        <!--android:typeface="serif" />-->
-                <!--</LinearLayout>-->
-            <!--</android.support.v7.widget.CardView>-->
-        <!--</LinearLayout>-->
+                    <TextView
+                        android:id="@+id/email_h"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:linksClickable="true"
+                        android:padding="8dp"
+                        android:text="@string/email_h"
+                        android:textColor="#ff000000"
+                        android:textSize="16sp"
+                        android:typeface="serif" />
+                </LinearLayout>
+            </android.support.v7.widget.CardView>
+        </LinearLayout>
 
-    <!--</LinearLayout>-->
+    </LinearLayout>
 </ScrollView>

@@ -28,10 +28,10 @@
             android:theme="@style/AppTheme2" />
         <activity
             android:name=".DetailActivity"
-            android:theme="@style/AppTheme" />
+            android:theme="@style/FullScreenTheme" />
 
         <activity android:name=".UploadActivity" />
-        <activity android:name=".AboutUs" />
+        <activity android:name=".AboutUs" android:theme="@style/NoActionBar"/>
         <activity android:name=".ContactUs" />
         <activity android:name=".UserActivity" android:theme="@style/AppTheme2" android:label="User Details"></activity>
     </application>
