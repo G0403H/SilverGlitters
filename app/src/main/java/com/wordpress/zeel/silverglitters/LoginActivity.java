@@ -142,18 +142,27 @@ public class LoginActivity extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
+
         final ProgressDialog progressDialog = ProgressDialog.show(LoginActivity.this,"Please Wait...","",true);
         final FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+
         if (user!=null){
+
             String uid = user.getUid();
-            mDatabase= FirebaseDatabase.getInstance().getReference("users").child(uid).child("disabled");
+            mDatabase = FirebaseDatabase.getInstance().getReference("users").child(uid);
+            if (mDatabase == null){
+                progressDialog.dismiss();
+                FirebaseAuth.getInstance().signOut();
+                return;
+            }
+
             mDatabase.addListenerForSingleValueEvent(new ValueEventListener() {
                 @Override
                 public void onDataChange(DataSnapshot dataSnapshot) {
                     progressDialog.dismiss();
-                    if (dataSnapshot!=null){
-                        boolean disabled = dataSnapshot.getValue(Boolean.class);
-                        if(!disabled){
+                    if (!dataSnapshot.equals(null)){
+                        User user = dataSnapshot.getValue(User.class);
+                        if(user!=null && !user.getDisabled()){
                             Intent intent = new Intent(LoginActivity.this,Dashboard.class);
                             startActivity(intent);
                             finish();

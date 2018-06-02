@@ -40,7 +40,7 @@ public class DetailActivity extends AppCompatActivity {
             ActionBar actionBar = getSupportActionBar();
             actionBar.setTitle(subCategoryName);
 
-            mTextViewPrice.setText("Price: " + subprice);
+            mTextViewPrice.setText("₹" + String.format("%.2f", subprice));
             Picasso.get()
                     .load(subimageURL)
                     .placeholder(R.mipmap.ic_launcher_round)

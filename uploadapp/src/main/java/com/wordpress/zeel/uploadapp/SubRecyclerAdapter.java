@@ -51,7 +51,7 @@ public class SubRecyclerAdapter extends RecyclerView.Adapter<SubRecyclerAdapter.
     @Override
     public void onBindViewHolder(RecyclerViewHolder holder, final int position) {
         holder.text_title.setText(mUploads.get(position).getName());
-        holder.text_subtitle.setText(String.valueOf(mUploads.get(position).getPrice()));
+        holder.text_subtitle.setText("₹"+String.format("%.2f", mUploads.get(position).getPrice()));
         Picasso.get()
                 .load(mUploads.get(position).getImageURL())
                 .placeholder(R.mipmap.ic_launcher_round)

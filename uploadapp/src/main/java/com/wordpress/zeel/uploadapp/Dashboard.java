@@ -132,8 +132,6 @@ public class Dashboard extends AppCompatActivity implements NavigationView.OnNav
             intent = new Intent(this, UploadActivity.class);
         } else if (id == R.id.action_users) {
             intent = new Intent(this, UserActivity.class);
-        } else if (id == R.id.menu_contact_us) {
-            intent = new Intent(this, ContactUs.class);
         } else if (id == R.id.menu_about) {
             intent = new Intent(this, AboutUs.class);
         } else if (id == R.id.menu_logout) {

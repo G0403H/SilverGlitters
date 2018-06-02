@@ -1,6 +1,7 @@
 package com.wordpress.zeel.silverglitters;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.design.widget.NavigationView;
@@ -11,12 +12,14 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.appinvite.AppInviteInvitation;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -29,21 +32,45 @@ import java.util.List;
 
 public class Dashboard extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
+    private static final int REQUEST_ID = 999;
+
     ProgressBar mProgressCircle;
     RecyclerView recyclerView;
     RecyclerAdapter recyclerAdapter;
-    TextView username;
+    List<Upload> mUploads;
+
     FirebaseAuth mAuth;
     DatabaseReference mDatabaseRef;
     ValueEventListener mDBListener;
-    List<Upload> mUploads;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_navigation_drawer);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+        NavigationView navigationView = findViewById(R.id.nav_view);
+        View headerView = navigationView.getHeaderView(0);
+        final TextView navUsername = headerView.findViewById(R.id.user_name);
+        final TextView navUseremail = headerView.findViewById(R.id.user_email);
+
+        mAuth = FirebaseAuth.getInstance();
+        String uid = mAuth.getCurrentUser().getUid();
+        FirebaseDatabase.getInstance().getReference("users").child(uid)
+                .addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(DataSnapshot dataSnapshot) {
+                        User user = dataSnapshot.getValue(User.class);
+                        navUsername.setText(user.getName());
+                        navUseremail.setText(user.getEmail());
+                    }
+
+                    @Override
+                    public void onCancelled(DatabaseError databaseError) {
+
+                    }
+                });
 
         mProgressCircle = findViewById(R.id.progress_circle);
 
@@ -51,26 +78,10 @@ public class Dashboard extends AppCompatActivity implements NavigationView.OnNav
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new GridLayoutManager(null, 2));
 
-        username = findViewById(R.id.user_name);
         mUploads = new ArrayList<>();
 
         recyclerAdapter = new RecyclerAdapter(mUploads, getApplicationContext());
         recyclerView.setAdapter(recyclerAdapter);
-
-        mAuth = FirebaseAuth.getInstance();
-//        String uid = mAuth.getCurrentUser().getUid();
-//        FirebaseDatabase.getInstance().getReference("users").child(uid).child("name")
-//                .addListenerForSingleValueEvent(new ValueEventListener() {
-//                    @Override
-//                    public void onDataChange(DataSnapshot dataSnapshot) {
-//                        username.setText(dataSnapshot.getValue(String.class));
-//                    }
-//
-//                    @Override
-//                    public void onCancelled(DatabaseError databaseError) {
-//
-//                    }
-//                });
 
         mDatabaseRef = FirebaseDatabase.getInstance().getReference("uploads");
         mDBListener = mDatabaseRef.addValueEventListener(new ValueEventListener() {
@@ -109,7 +120,6 @@ public class Dashboard extends AppCompatActivity implements NavigationView.OnNav
         drawer.addDrawerListener(toggle);
         toggle.syncState();
 
-        NavigationView navigationView = findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
     }
 
@@ -173,7 +183,10 @@ public class Dashboard extends AppCompatActivity implements NavigationView.OnNav
             intent = new Intent(this, ContactUs.class);
             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             startActivity(intent);
-        } else if (id == R.id.menu_about) {
+        } else if (id == R.id.menu_ivite){
+            onInviteClicked();
+        }
+        else if (id == R.id.menu_about) {
             intent = new Intent(this, AboutUs.class);
             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             startActivity(intent);
@@ -188,12 +201,36 @@ public class Dashboard extends AppCompatActivity implements NavigationView.OnNav
 
         }
 
-        //intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-
-
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
+    }
+
+    private void onInviteClicked() {
+        Intent intent = new AppInviteInvitation.IntentBuilder("Invite friends")
+                .setMessage("Check out this new app of Silver Glitters")
+                .setDeepLink(Uri.parse("https://d4hcz.app.goo.gl/silverglitters"))
+                .setCallToActionText("Invitation CTA")
+                .build();
+        startActivityForResult(intent, REQUEST_ID);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == REQUEST_ID){
+
+            Log.d("myTag","Resultcode = " + resultCode);
+
+            if (resultCode == RESULT_OK){
+                String ids[] = AppInviteInvitation.getInvitationIds(resultCode, data);
+                for (String id : ids) {
+                    Log.d("myTag", "onActivityResult: sent invitation " + id);
+                }
+            } else {
+                Toast.makeText(this, "Invitation not sent", Toast.LENGTH_SHORT).show();
+            }
+        }
     }
 
     @Override
