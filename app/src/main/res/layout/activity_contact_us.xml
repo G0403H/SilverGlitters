@@ -50,29 +50,6 @@
                     android:layout_height="wrap_content"
                     android:orientation="vertical">
 
-
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:gravity="center"
-                        android:padding="8dp"
-                        android:text="Address"
-                        android:textColor="#ff000000"
-                        android:textSize="20sp"
-                        android:textStyle="bold"
-                        android:typeface="serif" />
-
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:gravity="center"
-                        android:linksClickable="true"
-                        android:padding="8dp"
-                        android:text="@string/address"
-                        android:textColor="#ff000000"
-                        android:textSize="16sp"
-                        android:typeface="serif" />
-
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
