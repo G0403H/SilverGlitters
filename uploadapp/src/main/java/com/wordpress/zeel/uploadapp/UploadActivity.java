@@ -9,6 +9,8 @@ import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.webkit.MimeTypeMap;
+import android.widget.ArrayAdapter;
+import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -17,14 +19,19 @@ import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.OnProgressListener;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.StorageTask;
 import com.google.firebase.storage.UploadTask;
 import com.squareup.picasso.Picasso;
+
+import java.util.ArrayList;
 
 
 public class UploadActivity extends AppCompatActivity {
@@ -33,7 +40,8 @@ public class UploadActivity extends AppCompatActivity {
 
     private Button mButtonChooseImage;
     private Button mButtonUpload;
-    private EditText mEditTextFileName,mEditTextCategoryName,mEditTextPrice;
+    private EditText mEditTextFileName,mEditTextPrice;
+    private AutoCompleteTextView mEditTextCategoryName;
     private ImageView mImageView;
     private ProgressBar mProgressBar;
 
@@ -41,6 +49,7 @@ public class UploadActivity extends AppCompatActivity {
 
     private StorageReference mStorageRef;
     private DatabaseReference mDatabaseRef;
+    private DatabaseReference mDatabaseRef2;
 
     private StorageTask mUploadTask;
 
@@ -56,6 +65,8 @@ public class UploadActivity extends AppCompatActivity {
         mEditTextPrice = findViewById(R.id.edit_text_price);
         mImageView = findViewById(R.id.image_view);
         mProgressBar = findViewById(R.id.progress_bar);
+
+        findAndStoreSuggestions();
 
         mStorageRef = FirebaseStorage.getInstance().getReference("uploads");
 
@@ -103,6 +114,25 @@ public class UploadActivity extends AppCompatActivity {
         });
 
 
+    }
+
+    private void findAndStoreSuggestions() {
+        final ArrayList<String> categoryList = new ArrayList<>();
+        FirebaseDatabase.getInstance().getReference("uploads")
+                .addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(DataSnapshot dataSnapshot) {
+                        for (DataSnapshot snapshot : dataSnapshot.getChildren()){
+                            categoryList.add(snapshot.getKey());
+                        }
+                    }
+
+                    @Override
+                    public void onCancelled(DatabaseError databaseError) {}
+                });
+
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(this,android.R.layout.simple_list_item_1, categoryList);
+        mEditTextCategoryName.setAdapter(adapter);
     }
 
     private void openFileChooser() {

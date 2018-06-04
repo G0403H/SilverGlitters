@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#d6d6d6"
@@ -16,17 +16,17 @@
         android:paddingTop="12dp">
 
         <TextView
+            android:id="@+id/header"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textSize="25sp"
-            android:text="Developers"
-            android:fontFamily="cursive"
-            android:padding="6dp"
-            android:textColor="#ff171717"
-            android:id="@+id/header"
-            android:layout_marginTop="8dp"
             android:layout_marginBottom="8dp"
-            android:gravity="center"/>
+            android:layout_marginTop="8dp"
+            android:fontFamily="cursive"
+            android:gravity="center"
+            android:padding="6dp"
+            android:text="Developers"
+            android:textColor="#ff171717"
+            android:textSize="25sp" />
 
 
         <LinearLayout
@@ -37,12 +37,12 @@
             android:paddingRight="12dp">
 
             <android.support.v7.widget.CardView
-                card_view:cardBackgroundColor="#ffffff"
-                android:layout_height="wrap_content"
                 android:layout_width="match_parent"
-                card_view:cardCornerRadius="6dp"
+                android:layout_height="wrap_content"
                 android:layout_margin="12dp"
                 android:padding="6dp"
+                card_view:cardBackgroundColor="#ffffff"
+                card_view:cardCornerRadius="6dp"
                 card_view:cardElevation="3dp">
 
                 <LinearLayout
@@ -50,48 +50,60 @@
                     android:layout_height="wrap_content"
                     android:orientation="vertical">
 
-                    <de.hdodenhof.circleimageview.CircleImageView
+                    <TextView
                         android:layout_width="match_parent"
-                        android:layout_height="205dp"
-                        android:padding="12dp"
-                        android:src="@drawable/profile"
-                        app:civ_border_color="#ff000000"
-                        app:civ_border_width="2dp" />
+                        android:layout_height="wrap_content"
+                        android:padding="8dp"
+                        android:text="Jeel Santoki"
+                        android:textColor="#ff000000"
+                        android:textSize="20sp"
+                        android:textStyle="bold"
+                        android:typeface="serif" />
 
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:text="Jeel Santoki"
-                            android:textSize="20sp"
-                            android:gravity="center"
-                            android:textColor="#ff000000"
-                            android:padding="8dp"
-                            android:typeface="serif"
-                            android:textStyle="bold"
-                            />
+                    <TextView
+                        android:id="@+id/email_j"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:linksClickable="true"
+                        android:layout_marginLeft="10dp"
+                        android:text="@string/email_j"
+                        android:textColor="#ff000000"
+                        android:textSize="16sp"
+                        android:typeface="serif" />
 
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:text="@string/email_j"
-                            android:id="@+id/email_j"
-                            android:textSize="16sp"
-                            android:gravity="center"
-                            android:textColor="#ff000000"
-                            android:padding="8dp"
-                            android:typeface="serif"
-                            android:linksClickable="true"
-                            />
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:padding="8dp"
+                        android:text="Harsh Vasoya"
+                        android:textColor="#ff000000"
+                        android:textSize="20sp"
+                        android:textStyle="bold"
+                        android:typeface="serif" />
+
+                    <TextView
+                        android:id="@+id/email_h"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:linksClickable="true"
+                        android:text="@string/email_h"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginBottom="8dp"
+                        android:textColor="#ff000000"
+                        android:textSize="16sp"
+                        android:typeface="serif" />
+
                 </LinearLayout>
             </android.support.v7.widget.CardView>
 
             <android.support.v7.widget.CardView
-                card_view:cardBackgroundColor="#ffffff"
-                android:layout_height="wrap_content"
                 android:layout_width="match_parent"
-                card_view:cardCornerRadius="6dp"
+                android:layout_height="wrap_content"
                 android:layout_margin="12dp"
                 android:padding="6dp"
+                card_view:cardBackgroundColor="#ffffff"
+                card_view:cardCornerRadius="6dp"
                 card_view:cardElevation="3dp">
 
                 <LinearLayout
@@ -99,38 +111,6 @@
                     android:layout_height="wrap_content"
                     android:orientation="vertical">
 
-                    <de.hdodenhof.circleimageview.CircleImageView
-                        android:layout_width="match_parent"
-                        android:layout_height="205dp"
-                        android:padding="12dp"
-                        android:src="@drawable/profile1"
-                        app:civ_border_color="#ff000000"
-                        app:civ_border_width="2dp" />
-
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="Harsh Vasoya"
-                        android:textSize="20sp"
-                        android:gravity="center"
-                        android:textColor="#ff000000"
-                        android:padding="8dp"
-                        android:typeface="serif"
-                        android:textStyle="bold"
-                        />
-
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="@string/email_h"
-                        android:id="@+id/email_h"
-                        android:textSize="16sp"
-                        android:gravity="center"
-                        android:textColor="#ff000000"
-                        android:padding="8dp"
-                        android:typeface="serif"
-                        android:linksClickable="true"
-                        />
                 </LinearLayout>
             </android.support.v7.widget.CardView>
         </LinearLayout>
