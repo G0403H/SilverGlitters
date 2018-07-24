@@ -51,6 +51,7 @@ public class SubRecyclerAdapter extends RecyclerView.Adapter<SubRecyclerAdapter.
             @Override
             public void onClick(View v) {
                 Bundle bundle = new Bundle();
+                bundle.putString("category_title", mUploads.get(position).getCategory());
                 bundle.putString("Subcategory_title", mUploads.get(position).getName());
                 bundle.putString("Subcategory_imageURL", mUploads.get(position).getImageURL());
                 bundle.putDouble("Subcategory_price", mUploads.get(position).getPrice());

@@ -24,14 +24,13 @@
 
         <TextView
             android:layout_width="match_parent"
-            android:layout_height="40dp"
-            android:layout_marginLeft="5dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
             android:id="@+id/card_title"
             android:text="Titlebar"
             android:textSize="20sp"
             android:textColor="#ffffff"
             android:textStyle="bold"
-            android:singleLine="true"
             android:gravity="center_vertical"/>
 
 

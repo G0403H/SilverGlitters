@@ -6,6 +6,7 @@ import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.view.View;
 import android.widget.ProgressBar;
 import android.widget.Toast;
@@ -48,7 +49,7 @@ public class SubDashboard extends AppCompatActivity {
         mProgressCircle = findViewById(R.id.progress_circle2);
 
         recyclerView = findViewById(R.id.dashboard_recyclerView);
-        recyclerView.setLayoutManager(new GridLayoutManager(null, 2));
+        recyclerView.setLayoutManager(new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL));
         recyclerView.setHasFixedSize(true);
 
         mUploads = new ArrayList<>();
