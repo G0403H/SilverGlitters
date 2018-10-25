@@ -22,6 +22,7 @@ import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException;
 import com.google.firebase.auth.PhoneAuthCredential;
 import com.google.firebase.auth.PhoneAuthProvider;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.messaging.FirebaseMessaging;
 
 import java.util.Timer;
 import java.util.TimerTask;
@@ -109,7 +110,7 @@ public class SignupActivity extends AppCompatActivity {
 
 
                 sendVerificationCode();
-               // cardView.setVisibility(View.VISIBLE);
+                // cardView.setVisibility(View.VISIBLE);
                 editTextPhone.setEnabled(false);
                 editTextName.setEnabled(false);
                 editTextEmail.setEnabled(false);
@@ -158,6 +159,7 @@ public class SignupActivity extends AppCompatActivity {
                     }
                 });
     }
+
     private void sendVerificationCode(){
 
         String phone = editTextPhone.getText().toString();
@@ -250,6 +252,9 @@ public class SignupActivity extends AppCompatActivity {
                                 public void onComplete(@NonNull Task<Void> task) {
                                     dialog.dismiss();
                                     if (task.isSuccessful()) {
+
+                                        FirebaseMessaging.getInstance().subscribeToTopic("notifications");
+
                                         Toast.makeText(SignupActivity.this, getString(R.string.registration_success), Toast.LENGTH_LONG).show();
                                         Intent intent = new Intent(SignupActivity.this,Dashboard.class);
                                         startActivity(intent);

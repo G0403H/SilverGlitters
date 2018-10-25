@@ -93,12 +93,12 @@ public class Dashboard extends AppCompatActivity implements NavigationView.OnNav
                 for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
                     Upload upload = null;
 
-                    for(DataSnapshot subSnapshot : snapshot.getChildren()){
+                    for (DataSnapshot subSnapshot : snapshot.getChildren()) {
                         upload = subSnapshot.getValue(Upload.class);
                         break;
                     }
 
-                    if(upload != null)
+                    if (upload != null)
                         mUploads.add(upload);
                 }
 
@@ -172,7 +172,6 @@ public class Dashboard extends AppCompatActivity implements NavigationView.OnNav
 //    }
 
 
-
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
@@ -184,16 +183,18 @@ public class Dashboard extends AppCompatActivity implements NavigationView.OnNav
             intent = new Intent(this, ContactUs.class);
             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             startActivity(intent);
-        } else if (id == R.id.menu_ivite){
+        } else if (id == R.id.menu_ivite) {
             onInviteClicked();
-        }
-        else if (id == R.id.menu_about) {
+        } else if (id == R.id.menu_about) {
             intent = new Intent(this, AboutUs.class);
             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             startActivity(intent);
+        } else if (id == R.id.menu_policy) {
+            intent = new Intent(Intent.ACTION_VIEW, Uri.parse(getString(R.string.policy_url)));
+            startActivity(intent);
         } else if (id == R.id.menu_logout) {
             // Logout from the system
-            if (mAuth!=null){
+            if (mAuth != null) {
                 mAuth.signOut();
                 intent = new Intent(this, LoginActivity.class);
                 startActivity(intent);
@@ -219,11 +220,11 @@ public class Dashboard extends AppCompatActivity implements NavigationView.OnNav
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == REQUEST_ID){
+        if (requestCode == REQUEST_ID) {
 
-            Log.d("myTag","Resultcode = " + resultCode);
+            Log.d("myTag", "Resultcode = " + resultCode);
 
-            if (resultCode == RESULT_OK){
+            if (resultCode == RESULT_OK) {
                 String ids[] = AppInviteInvitation.getInvitationIds(resultCode, data);
                 for (String id : ids) {
                     Log.d("myTag", "onActivityResult: sent invitation " + id);

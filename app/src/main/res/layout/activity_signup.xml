@@ -158,6 +158,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="5dp"
+                android:layout_marginTop="3dp"
+                android:layout_marginBottom="3dp"
                 android:orientation="vertical">
 
                 <EditText
@@ -168,6 +170,7 @@
                     android:hint="Enter Verification Code"
                     android:inputType="numberSigned"
                     android:maxLines="1"
+                    android:gravity="center"
                     android:singleLine="true"
                     android:textSize="16sp" />
 

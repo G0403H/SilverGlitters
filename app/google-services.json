@@ -15,16 +15,12 @@
       },
       "oauth_client": [
         {
-          "client_id": "1088013675515-m1cfop5g05jluuutc5lbu2a2hg32d9hf.apps.googleusercontent.com",
+          "client_id": "1088013675515-sc8hq7v1p29r1loc7ek45uv32v4prchm.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
             "package_name": "com.wordpress.zeel.silverglitters",
-            "certificate_hash": "f730a624816a48d42fe7245c21d078ab3daf428b"
+            "certificate_hash": "9801a68f2f8c09eee250c8729e097bc2f2504945"
           }
-        },
-        {
-          "client_id": "1088013675515-ai4ie08cloni1riim2bm905q48tlc8vi.apps.googleusercontent.com",
-          "client_type": 3
         },
         {
           "client_id": "1088013675515-ai4ie08cloni1riim2bm905q48tlc8vi.apps.googleusercontent.com",
@@ -63,8 +59,12 @@
       },
       "oauth_client": [
         {
-          "client_id": "1088013675515-ai4ie08cloni1riim2bm905q48tlc8vi.apps.googleusercontent.com",
-          "client_type": 3
+          "client_id": "1088013675515-607vg290fdb2n6lq1bjhkd9vmghmmdqv.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.wordpress.zeel.uploadapp",
+            "certificate_hash": "9801a68f2f8c09eee250c8729e097bc2f2504945"
+          }
         },
         {
           "client_id": "1088013675515-ai4ie08cloni1riim2bm905q48tlc8vi.apps.googleusercontent.com",
@@ -81,8 +81,13 @@
           "status": 1
         },
         "appinvite_service": {
-          "status": 1,
-          "other_platform_oauth_client": []
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1088013675515-ai4ie08cloni1riim2bm905q48tlc8vi.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
         },
         "ads_service": {
           "status": 2
