@@ -9,75 +9,117 @@
     tools:context=".DetailActivity"
     tools:showIn="@layout/activity_detail">
 
-    <RelativeLayout
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:layout_height="wrap_content">
 
-        <android.support.v7.widget.CardView
-            android:id="@+id/card_price"
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="12dp"
-            android:padding="6dp"
-            card_view:cardBackgroundColor="#ffffff"
-            card_view:cardCornerRadius="6dp"
-            card_view:cardElevation="5dp">
+            android:layout_height="match_parent"
+            android:orientation="vertical">
 
-            <TableRow
+            <android.support.v7.widget.CardView
+                android:id="@+id/card_price"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:padding="5dp">
+                android:layout_height="wrap_content"
+                android:layout_margin="12dp"
+                android:padding="6dp"
+                card_view:cardBackgroundColor="#ffffff"
+                card_view:cardCornerRadius="6dp"
+                card_view:cardElevation="5dp">
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:linksClickable="true"
-                    android:padding="8dp"
-                    android:text="Price:"
-                    android:textColor="#ff000000"
-                    android:textSize="20sp"
-                    android:typeface="serif" />
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:padding="5dp">
 
-                <TextView
-                    android:id="@+id/text_price"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:gravity="center"
-                    android:padding="8dp"
-                    android:text="₹999"
-                    android:textColor="@color/colorAccent"
-                    android:textSize="20sp"
-                    android:typeface="serif" />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:linksClickable="true"
+                        android:padding="8dp"
+                        android:text="Price:"
+                        android:textColor="#ff000000"
+                        android:textSize="20sp"
+                        android:typeface="serif" />
 
-            </TableRow>
-        </android.support.v7.widget.CardView>
+                    <TextView
+                        android:id="@+id/text_price"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:padding="8dp"
+                        android:text="₹999"
+                        android:textColor="@color/colorAccent"
+                        android:textSize="20sp"
+                        android:typeface="serif" />
 
-        <android.support.v7.widget.CardView
-            android:id="@+id/card_order"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/card_price"
-            android:layout_alignParentBottom="true"
-            android:layout_marginBottom="12dp"
-            android:layout_marginLeft="12dp"
-            android:layout_marginRight="12dp"
-            android:padding="6dp"
-            card_view:cardBackgroundColor="#ffffff"
-            card_view:cardCornerRadius="6dp"
-            card_view:cardElevation="5dp">
+                </TableRow>
+            </android.support.v7.widget.CardView>
 
-            <TableRow
+            <android.support.v7.widget.CardView
+                android:id="@+id/card_description"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="#2E3B3C"
-                android:gravity="center"
-                android:padding="5dp">
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/card_price"
+                android:layout_marginLeft="12dp"
+                android:layout_marginRight="12dp"
+                android:padding="6dp"
+                card_view:cardBackgroundColor="#ffffff"
+                card_view:cardCornerRadius="6dp"
+                card_view:cardElevation="5dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical"
+                    android:padding="5dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:padding="8dp"
+                        android:text="Product Description"
+                        android:textColor="#ff000000"
+                        android:textSize="20sp"
+                        android:typeface="serif" />
+
+                    <TextView
+                        android:id="@+id/text_description"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:justificationMode="inter_word"
+                        android:linksClickable="true"
+                        android:paddingBottom="8dp"
+                        android:paddingLeft="8dp"
+                        android:paddingRight="8dp"
+                        android:text="Description text"
+                        android:textColor="#5c5858"
+                        android:textSize="17sp"
+                        android:textStyle="italic"
+                        android:typeface="serif" />
+
+                </LinearLayout>
+            </android.support.v7.widget.CardView>
+
+            <android.support.v7.widget.CardView
+                android:id="@+id/card_order"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/card_description"
+                android:layout_marginLeft="12dp"
+                android:layout_marginRight="12dp"
+                android:layout_marginTop="25dp"
+                android:padding="6dp"
+                card_view:cardBackgroundColor="#2E3B3C"
+                card_view:cardCornerRadius="6dp"
+                card_view:cardElevation="5dp">
 
                 <TextView
                     android:id="@+id/txt_order"
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:gravity="center"
                     android:linksClickable="true"
                     android:padding="8dp"
                     android:text="Order on WhatsApp"
@@ -85,9 +127,35 @@
                     android:textSize="20sp"
                     android:typeface="serif" />
 
-            </TableRow>
-        </android.support.v7.widget.CardView>
+            </android.support.v7.widget.CardView>
 
-    </RelativeLayout>
+            <android.support.v7.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/card_order"
+                android:layout_marginLeft="12dp"
+                android:layout_marginRight="12dp"
+                android:layout_marginBottom="12dp"
+                android:layout_marginTop="6dp"
+                android:padding="6dp"
+                card_view:cardBackgroundColor="#2E3B3C"
+                card_view:cardCornerRadius="6dp"
+                card_view:cardElevation="5dp">
 
+                <TextView
+                    android:id="@+id/txt_order_website"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:linksClickable="true"
+                    android:padding="8dp"
+                    android:text="Order on Website"
+                    android:textColor="#ffffff"
+                    android:textSize="20sp"
+                    android:typeface="serif" />
+
+            </android.support.v7.widget.CardView>
+
+        </RelativeLayout>
+    </ScrollView>
 </android.support.v4.widget.NestedScrollView>

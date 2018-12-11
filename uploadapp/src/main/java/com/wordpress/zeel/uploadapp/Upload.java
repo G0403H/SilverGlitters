@@ -8,9 +8,10 @@ public class Upload {
     private String category;
     private String key;
     private double price;
+    private String description;
+    private String weblink;
 
-
-    public Upload(){
+    public Upload() {
 
     }
 
@@ -19,6 +20,15 @@ public class Upload {
         this.imageURL = imageURL;
         this.category = category;
         this.price = Double.parseDouble(price);
+    }
+
+    public Upload(String name, String imageURL, String category, String price, String description, String weblink) {
+        this.name = name;
+        this.imageURL = imageURL;
+        this.category = category;
+        this.price = Double.parseDouble(price);
+        this.description = description;
+        this.weblink = weblink;
     }
 
     public String getName() {
@@ -31,6 +41,26 @@ public class Upload {
 
     public String getImageURL() {
         return imageURL;
+    }
+
+    public String getDescription() {
+        if (description == null)
+            description = "No description available.";
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public String getWeblink() {
+        if (weblink == null)
+            weblink = "Link for the website";
+        return weblink;
+    }
+
+    public void setWeblink(String weblink) {
+        this.weblink = weblink;
     }
 
     public void setImageURL(String imageURL) {

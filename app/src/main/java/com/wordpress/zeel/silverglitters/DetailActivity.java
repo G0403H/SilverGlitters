@@ -1,21 +1,14 @@
 package com.wordpress.zeel.silverglitters;
 
 import android.content.Intent;
-import android.content.pm.PackageInfo;
-import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.text.method.LinkMovementMethod;
-import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
@@ -25,8 +18,6 @@ import com.google.firebase.database.ValueEventListener;
 import com.squareup.picasso.Picasso;
 
 import java.io.UnsupportedEncodingException;
-import java.net.MalformedURLException;
-import java.net.URL;
 import java.net.URLEncoder;
 
 public class DetailActivity extends AppCompatActivity {
@@ -34,10 +25,12 @@ public class DetailActivity extends AppCompatActivity {
     String categoryName;
     String subCategoryName;
     String subimageURL;
+    String mDescription;
+    String mWeblink;
     double subprice;
     User currentUser;
 
-    TextView mTextViewPrice, mTextViewOrder;
+    TextView mTextViewPrice, mTextViewWhatsapp, mTextViewDescription, mTextViewWebsite;
     ImageView mToolbarImage;
 
     @Override
@@ -48,8 +41,10 @@ public class DetailActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
 
         mTextViewPrice = findViewById(R.id.text_price);
-        mTextViewOrder = findViewById(R.id.txt_order);
+        mTextViewWhatsapp = findViewById(R.id.txt_order);
         mToolbarImage = findViewById(R.id.toolbar_image);
+        mTextViewDescription = findViewById(R.id.text_description);
+        mTextViewWebsite = findViewById(R.id.txt_order_website);
 
         Bundle bundle = getIntent().getExtras();
         if (bundle != null) {
@@ -57,12 +52,15 @@ public class DetailActivity extends AppCompatActivity {
             subCategoryName = bundle.getString("Subcategory_title");
             subimageURL = bundle.getString("Subcategory_imageURL");
             subprice = bundle.getDouble("Subcategory_price");
+            mDescription = bundle.getString("Subcategory_description");
+            mWeblink = bundle.getString("Subcategory_weblink");
 
             ActionBar actionBar = getSupportActionBar();
             actionBar.setTitle(subCategoryName);
 
 
             mTextViewPrice.setText("₹" + String.format("%.2f", subprice));
+            mTextViewDescription.setText(mDescription);
             Picasso.get()
                     .load(subimageURL)
                     .placeholder(R.mipmap.ic_launcher_round)
@@ -84,7 +82,7 @@ public class DetailActivity extends AppCompatActivity {
                     }
                 });
 
-        mTextViewOrder.setOnClickListener(new View.OnClickListener() {
+        mTextViewWhatsapp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 //                Uri uri = Uri.parse("smsto:" + R.string.contact_number);
@@ -93,7 +91,15 @@ public class DetailActivity extends AppCompatActivity {
 //                i.setPackage("com.whatsapp");
 //                i.putExtra(Intent.EXTRA_TEXT, "Hello from Harsh Vasoya!");
 //                startActivity(i);
-                onClickWhatsApp(mTextViewOrder);
+                onClickWhatsApp(mTextViewWhatsapp);
+            }
+        });
+
+        mTextViewWebsite.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(mWeblink));
+                startActivity(intent);
             }
         });
     }

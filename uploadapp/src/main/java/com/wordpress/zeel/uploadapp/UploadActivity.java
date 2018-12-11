@@ -40,7 +40,7 @@ public class UploadActivity extends AppCompatActivity {
 
     private Button mButtonChooseImage;
     private Button mButtonUpload;
-    private EditText mEditTextFileName,mEditTextPrice;
+    private EditText mEditTextFileName, mEditTextPrice, mEditTextDescription, mEditTextLink;
     private AutoCompleteTextView mEditTextCategoryName;
     private ImageView mImageView;
     private ProgressBar mProgressBar;
@@ -65,6 +65,8 @@ public class UploadActivity extends AppCompatActivity {
         mEditTextPrice = findViewById(R.id.edit_text_price);
         mImageView = findViewById(R.id.image_view);
         mProgressBar = findViewById(R.id.progress_bar);
+        mEditTextDescription = findViewById(R.id.edit_text_description);
+        mEditTextLink = findViewById(R.id.edit_text_link);
 
         findAndStoreSuggestions();
 
@@ -89,6 +91,8 @@ public class UploadActivity extends AppCompatActivity {
                     String name = mEditTextFileName.getText().toString().trim();
                     String category = mEditTextCategoryName.getText().toString().trim();
                     String price = mEditTextPrice.getText().toString().trim();
+                    String description = mEditTextDescription.getText().toString().trim();
+                    String link = mEditTextLink.getText().toString().trim();
 
                     if(name.equals("")){
                         mEditTextFileName.setError("Fill up all the fields");
@@ -108,7 +112,17 @@ public class UploadActivity extends AppCompatActivity {
                         return;
                     }
 
-                    uploadFile(name,category,price);
+                    if(description.equals("")){
+                        mEditTextDescription.setError("Fill up all the fields");
+                        mEditTextDescription.requestFocus();
+                        return;
+                    }
+
+                    if(link.equals("")){
+                        link = "https://silverglitters.com";
+                    }
+
+                    uploadFile(name,category,price,description,link);
                 }
             }
         });
@@ -160,7 +174,7 @@ public class UploadActivity extends AppCompatActivity {
         return mime.getExtensionFromMimeType(cR.getType(uri));
     }
 
-    private void uploadFile(final String name, final String category, final String price) {
+    private void uploadFile(final String name, final String category, final String price, final String description, final String link) {
         if (mImageUri != null) {
             StorageReference fileReference = mStorageRef.child(System.currentTimeMillis()
                     + "." + getFileExtension(mImageUri));
@@ -179,7 +193,7 @@ public class UploadActivity extends AppCompatActivity {
                             
                             Toast.makeText(UploadActivity.this, "Upload successful", Toast.LENGTH_LONG).show();
 
-                            Upload upload = new Upload(name,taskSnapshot.getDownloadUrl().toString(), category, price);
+                            Upload upload = new Upload(name,taskSnapshot.getDownloadUrl().toString(), category, price, description, link);
 
                             mDatabaseRef = FirebaseDatabase.getInstance().getReference("uploads").child(category);
 

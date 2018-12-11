@@ -55,6 +55,8 @@ public class SubRecyclerAdapter extends RecyclerView.Adapter<SubRecyclerAdapter.
                 bundle.putString("Subcategory_title", mUploads.get(position).getName());
                 bundle.putString("Subcategory_imageURL", mUploads.get(position).getImageURL());
                 bundle.putDouble("Subcategory_price", mUploads.get(position).getPrice());
+                bundle.putString("Subcategory_description", mUploads.get(position).getDescription());
+                bundle.putString("Subcategory_weblink", mUploads.get(position).getWeblink());
 
                 Intent i = new Intent(context, DetailActivity.class);
                 i.putExtras(bundle);
