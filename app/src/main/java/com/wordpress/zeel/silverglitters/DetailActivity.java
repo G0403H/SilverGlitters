@@ -3,6 +3,7 @@ package com.wordpress.zeel.silverglitters;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.v4.view.ViewPager;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -15,7 +16,7 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-import com.squareup.picasso.Picasso;
+import com.viewpagerindicator.CirclePageIndicator;
 
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
@@ -42,7 +43,7 @@ public class DetailActivity extends AppCompatActivity {
 
         mTextViewPrice = findViewById(R.id.text_price);
         mTextViewWhatsapp = findViewById(R.id.txt_order);
-        mToolbarImage = findViewById(R.id.toolbar_image);
+        //mToolbarImage = findViewById(R.id.toolbar_image);
         mTextViewDescription = findViewById(R.id.text_description);
         mTextViewWebsite = findViewById(R.id.txt_order_website);
 
@@ -58,15 +59,21 @@ public class DetailActivity extends AppCompatActivity {
             ActionBar actionBar = getSupportActionBar();
             actionBar.setTitle(subCategoryName);
 
+            String[] imageUrls = {subimageURL, "https://www.popsci.com/sites/popsci.com/files/styles/1000_1x_/public/images/2017/03/6990634-panda-hug.jpg?itok=-b6_uG4r&fc=50,50"};
+            ViewPager viewPager = findViewById(R.id.viewPager);
+            ViewPageAdapter adapter = new ViewPageAdapter(this,imageUrls);
+            viewPager.setAdapter(adapter);
 
+            CirclePageIndicator circlePageIndicator = findViewById(R.id.indicator);
+            circlePageIndicator.setViewPager(viewPager);
             mTextViewPrice.setText("₹" + String.format("%.2f", subprice));
             mTextViewDescription.setText(mDescription);
-            Picasso.get()
-                    .load(subimageURL)
-                    .placeholder(R.mipmap.ic_launcher_round)
-                    .fit()
-                    .centerCrop()
-                    .into(mToolbarImage);
+//            Picasso.get()
+//                    .load(subimageURL)
+//                    .placeholder(R.mipmap.ic_launcher_round)
+//                    .fit()
+//                    .centerCrop()
+//                    .into(mToolbarImage);
         }
 
         String uid = FirebaseAuth.getInstance().getCurrentUser().getUid();

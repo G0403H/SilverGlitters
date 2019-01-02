@@ -1,1 +1,1 @@
-include ':app', ':uploadapp'
+include ':app', ':uploadapp', ':viewpagerindicator-library'

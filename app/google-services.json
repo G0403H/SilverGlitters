@@ -23,6 +23,14 @@
           }
         },
         {
+          "client_id": "1088013675515-sc7lhr6inrr8a30e428nq4bn77cfj8fo.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.wordpress.zeel.silverglitters",
+            "certificate_hash": "f730a624816a48d42fe7245c21d078ab3daf428b"
+          }
+        },
+        {
           "client_id": "1088013675515-ai4ie08cloni1riim2bm905q48tlc8vi.apps.googleusercontent.com",
           "client_type": 3
         }

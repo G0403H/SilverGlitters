@@ -2,6 +2,8 @@ package com.wordpress.zeel.uploadapp;
 
 import com.google.firebase.database.Exclude;
 
+import java.util.ArrayList;
+
 public class Upload {
     private String name;
     private String imageURL;
@@ -10,7 +12,7 @@ public class Upload {
     private double price;
     private String description;
     private String weblink;
-
+    private ArrayList<String> urls;
     public Upload() {
 
     }
@@ -29,6 +31,18 @@ public class Upload {
         this.price = Double.parseDouble(price);
         this.description = description;
         this.weblink = weblink;
+    }
+
+    public Upload(String url){
+        this.urls.add(url);
+    }
+
+    public ArrayList<String> getUrls() {
+        return urls;
+    }
+
+    public void setUrls(String urls) {
+        this.urls.add(urls);
     }
 
     public String getName() {

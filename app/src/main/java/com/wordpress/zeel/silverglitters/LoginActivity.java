@@ -26,7 +26,6 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-import com.google.firebase.messaging.FirebaseMessaging;
 
 public class LoginActivity extends AppCompatActivity {
 
@@ -143,7 +142,7 @@ public class LoginActivity extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
-
+        Toast.makeText(LoginActivity.this,"starting up...",Toast.LENGTH_LONG).show();
         final ProgressDialog progressDialog = ProgressDialog.show(LoginActivity.this,"Please Wait...","",true);
         final FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
 

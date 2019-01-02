@@ -1,32 +1,44 @@
 package com.wordpress.zeel.uploadapp;
 
+import android.content.ContentResolver;
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
+import android.support.annotation.NonNull;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
+import android.webkit.MimeTypeMap;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.StorageTask;
+import com.google.firebase.storage.UploadTask;
 import com.squareup.picasso.Picasso;
 
 public class DetailActivity extends AppCompatActivity {
-
+    private static final int PICK_IMAGE_REQUEST = 1;
     String mProductTitle, mDescription, mWeblink, mCategoryName;
     String subimageURL;
     double subprice;
 
     TextView mTextViewPrice, mTextViewDescription, mTextViewWeblink;
     EditText mEditTextPrice, mEditTextDescription, mEditTextWeblink;
-    Button mBtnSavePrice, mBtnSaveDescription, mBtnSaveWeblink;
+    Button mBtnSavePrice, mBtnSaveDescription, mBtnSaveWeblink,mBtnAdd;
     ImageView mToolbarImage;
-
+    private Uri mImageUri;
+    private StorageTask mUploadTask;
+    private StorageReference mStorageRef;
     private String mDocumentKey;
     private DatabaseReference mDatabaseRef;
     private Upload upload;
@@ -48,7 +60,8 @@ public class DetailActivity extends AppCompatActivity {
         mBtnSavePrice = findViewById(R.id.btn_save_price);
         mBtnSaveDescription = findViewById(R.id.btn_save_description);
         mBtnSaveWeblink = findViewById(R.id.btn_save_weblink);
-
+        mBtnAdd = findViewById(R.id.btn_add);
+        mStorageRef = FirebaseStorage.getInstance().getReference("uploads");
         Bundle bundle = getIntent().getExtras();
         if (bundle != null) {
             mProductTitle = bundle.getString("Subcategory_title");
@@ -131,8 +144,73 @@ public class DetailActivity extends AppCompatActivity {
                 saveWeblink();
             }
         });
+
+        mBtnAdd.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                openFileChooser();
+            }
+        });
     }
 
+    private void openFileChooser() {
+        Intent intent = new Intent();
+        intent.setType("image/*");
+        intent.setAction(Intent.ACTION_GET_CONTENT);
+        startActivityForResult(intent, PICK_IMAGE_REQUEST);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == PICK_IMAGE_REQUEST && resultCode == RESULT_OK
+                && data != null && data.getData() != null) {
+            mImageUri = data.getData();
+            uploadFile();
+        }
+    }
+
+    private String getFileExtension(Uri uri) {
+        ContentResolver cR = getContentResolver();
+        MimeTypeMap mime = MimeTypeMap.getSingleton();
+        return mime.getExtensionFromMimeType(cR.getType(uri));
+    }
+
+    private void uploadFile() {
+        if (mImageUri != null) {
+            StorageReference fileReference = mStorageRef.child(System.currentTimeMillis()
+                    + "." + getFileExtension(mImageUri));
+
+            mUploadTask = fileReference.putFile(mImageUri)
+                    .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                        @Override
+                        public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+//                            Handler handler = new Handler();
+//                            handler.postDelayed(new Runnable() {
+//                                @Override
+//                                public void run() {
+//
+//                                }
+//                            }, 500);
+//
+                            //Toast.makeText(DetailActivity.this, "Upload successful", Toast.LENGTH_LONG).show();
+                            Toast.makeText(DetailActivity.this,taskSnapshot.getDownloadUrl().toString(),Toast.LENGTH_LONG).show();
+//                            upload.setUrls(taskSnapshot.getDownloadUrl().toString());
+//                            mDatabaseRef.setValue(upload);
+
+                        }
+                    })
+                    .addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception e) {
+                            Toast.makeText(DetailActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
+                        }
+                    });
+
+        } else {
+            Toast.makeText(this, "No file selected", Toast.LENGTH_SHORT).show();
+        }
+    }
     private void savePrice() {
         mTextViewPrice.setText("₹" + mEditTextPrice.getText().toString());
 
