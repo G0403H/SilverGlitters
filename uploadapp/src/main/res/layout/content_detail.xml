@@ -238,6 +238,7 @@
                 android:layout_below="@+id/card_order"
                 android:layout_margin="12dp"
                 android:padding="6dp"
+                android:background="#2E3B3C"
                 card_view:cardBackgroundColor="#ffffff"
                 card_view:cardCornerRadius="6dp"
                 card_view:cardElevation="5dp">
@@ -247,7 +248,8 @@
                     android:layout_height="wrap_content"
                     android:textSize="17sp"
                     android:text="Add more images"
-                    android:textColor="#ff000000"
+                    android:textColor="#ffffff"
+                    android:background="#2E3B3C"
                     android:padding="10dp"
                     android:id="@+id/btn_add"
                     />

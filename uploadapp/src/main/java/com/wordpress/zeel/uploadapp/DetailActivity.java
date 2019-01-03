@@ -8,6 +8,7 @@ import android.support.annotation.NonNull;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.View;
 import android.webkit.MimeTypeMap;
 import android.widget.Button;
@@ -61,8 +62,10 @@ public class DetailActivity extends AppCompatActivity {
         mBtnSaveDescription = findViewById(R.id.btn_save_description);
         mBtnSaveWeblink = findViewById(R.id.btn_save_weblink);
         mBtnAdd = findViewById(R.id.btn_add);
+
         mStorageRef = FirebaseStorage.getInstance().getReference("uploads");
         Bundle bundle = getIntent().getExtras();
+
         if (bundle != null) {
             mProductTitle = bundle.getString("Subcategory_title");
             mCategoryName = bundle.getString("Subcategory_categoryName");
@@ -73,6 +76,7 @@ public class DetailActivity extends AppCompatActivity {
             mDocumentKey = bundle.getString("DB_KEY");
 
             upload = new Upload(mProductTitle, subimageURL, mCategoryName, String.valueOf(subprice), mDescription, mWeblink);
+            upload.setUrls(bundle.getStringArrayList("Subcategory_urlList"));
 
             ActionBar actionBar = getSupportActionBar();
             actionBar.setTitle(mProductTitle);
@@ -185,19 +189,13 @@ public class DetailActivity extends AppCompatActivity {
                     .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                         @Override
                         public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-//                            Handler handler = new Handler();
-//                            handler.postDelayed(new Runnable() {
-//                                @Override
-//                                public void run() {
-//
-//                                }
-//                            }, 500);
-//
-                            //Toast.makeText(DetailActivity.this, "Upload successful", Toast.LENGTH_LONG).show();
-                            Toast.makeText(DetailActivity.this,taskSnapshot.getDownloadUrl().toString(),Toast.LENGTH_LONG).show();
-//                            upload.setUrls(taskSnapshot.getDownloadUrl().toString());
-//                            mDatabaseRef.setValue(upload);
 
+                            String downloadURL = taskSnapshot.getDownloadUrl().toString();
+//                            Log.d("myTag", downloadURL);
+
+                            upload.addUrl(downloadURL);
+                            mDatabaseRef.setValue(upload);
+                            Toast.makeText(DetailActivity.this, "Upload successful", Toast.LENGTH_LONG).show();
                         }
                     })
                     .addOnFailureListener(new OnFailureListener() {
@@ -211,6 +209,7 @@ public class DetailActivity extends AppCompatActivity {
             Toast.makeText(this, "No file selected", Toast.LENGTH_SHORT).show();
         }
     }
+
     private void savePrice() {
         mTextViewPrice.setText("₹" + mEditTextPrice.getText().toString());
 

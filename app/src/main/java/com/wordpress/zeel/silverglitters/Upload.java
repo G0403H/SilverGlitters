@@ -2,6 +2,8 @@ package com.wordpress.zeel.silverglitters;
 
 import com.google.firebase.database.Exclude;
 
+import java.util.ArrayList;
+
 public class Upload {
     private String name;
     private String imageURL;
@@ -10,6 +12,7 @@ public class Upload {
     private String weblink;
     private String key;
     private double price;
+    private ArrayList<String> otherImageURLs;
 
     public Upload() {
         // empty constructor is needed - don't delete
@@ -58,7 +61,7 @@ public class Upload {
 
     public String getDescription() {
         if(description==null)
-            description = "Description of product";
+            description = "No description available";
         return description;
     }
 
@@ -74,6 +77,14 @@ public class Upload {
 
     public void setWeblink(String weblink) {
         this.weblink = weblink;
+    }
+
+    public ArrayList<String> getOtherImageURLs() {
+        return otherImageURLs;
+    }
+
+    public void setOtherImageURLs(ArrayList<String> otherImageURLs) {
+        this.otherImageURLs = otherImageURLs;
     }
 
     @Exclude

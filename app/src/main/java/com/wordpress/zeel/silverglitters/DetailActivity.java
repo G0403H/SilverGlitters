@@ -20,6 +20,7 @@ import com.viewpagerindicator.CirclePageIndicator;
 
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
+import java.util.ArrayList;
 
 public class DetailActivity extends AppCompatActivity {
 
@@ -55,11 +56,13 @@ public class DetailActivity extends AppCompatActivity {
             subprice = bundle.getDouble("Subcategory_price");
             mDescription = bundle.getString("Subcategory_description");
             mWeblink = bundle.getString("Subcategory_weblink");
+            ArrayList<String> list = bundle.getStringArrayList("Subcategory_urlList");
+            list.add(0, subimageURL);
 
             ActionBar actionBar = getSupportActionBar();
             actionBar.setTitle(subCategoryName);
 
-            String[] imageUrls = {subimageURL, "https://www.popsci.com/sites/popsci.com/files/styles/1000_1x_/public/images/2017/03/6990634-panda-hug.jpg?itok=-b6_uG4r&fc=50,50"};
+            String[] imageUrls = (String[]) list.toArray();
             ViewPager viewPager = findViewById(R.id.viewPager);
             ViewPageAdapter adapter = new ViewPageAdapter(this,imageUrls);
             viewPager.setAdapter(adapter);
@@ -68,12 +71,6 @@ public class DetailActivity extends AppCompatActivity {
             circlePageIndicator.setViewPager(viewPager);
             mTextViewPrice.setText("₹" + String.format("%.2f", subprice));
             mTextViewDescription.setText(mDescription);
-//            Picasso.get()
-//                    .load(subimageURL)
-//                    .placeholder(R.mipmap.ic_launcher_round)
-//                    .fit()
-//                    .centerCrop()
-//                    .into(mToolbarImage);
         }
 
         String uid = FirebaseAuth.getInstance().getCurrentUser().getUid();
@@ -92,12 +89,6 @@ public class DetailActivity extends AppCompatActivity {
         mTextViewWhatsapp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                Uri uri = Uri.parse("smsto:" + R.string.contact_number);
-//                Intent i = new Intent(Intent.ACTION_SENDTO, uri);
-//                i.setType("text/plain");
-//                i.setPackage("com.whatsapp");
-//                i.putExtra(Intent.EXTRA_TEXT, "Hello from Harsh Vasoya!");
-//                startActivity(i);
                 onClickWhatsApp(mTextViewWhatsapp);
             }
         });

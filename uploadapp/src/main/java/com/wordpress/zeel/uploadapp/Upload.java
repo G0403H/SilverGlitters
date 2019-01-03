@@ -13,6 +13,7 @@ public class Upload {
     private String description;
     private String weblink;
     private ArrayList<String> urls;
+
     public Upload() {
 
     }
@@ -31,17 +32,20 @@ public class Upload {
         this.price = Double.parseDouble(price);
         this.description = description;
         this.weblink = weblink;
-    }
-
-    public Upload(String url){
-        this.urls.add(url);
+        this.urls = new ArrayList<>();
     }
 
     public ArrayList<String> getUrls() {
         return urls;
     }
 
-    public void setUrls(String urls) {
+    public void setUrls(ArrayList<String> urls) {
+        this.urls = urls;
+    }
+
+    public void addUrl(String urls) {
+        if(this.urls == null)
+            this.urls = new ArrayList<>();
         this.urls.add(urls);
     }
 
