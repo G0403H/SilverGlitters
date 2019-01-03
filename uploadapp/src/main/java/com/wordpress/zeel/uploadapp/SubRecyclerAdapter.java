@@ -93,7 +93,7 @@ public class SubRecyclerAdapter extends RecyclerView.Adapter<SubRecyclerAdapter.
                 bundle.putString("Subcategory_description", mUploads.get(position).getDescription());
                 bundle.putString("Subcategory_weblink", mUploads.get(position).getWeblink());
                 bundle.putString("Subcategory_categoryName", mUploads.get(position).getCategory());
-                bundle.putStringArrayList("Subcategory_urlList",mUploads.get(position).getUrls());
+                bundle.putStringArrayList("Subcategory_urlList",mUploads.get(position).getOtherImageURLs());
                 bundle.putString("DB_KEY", mUploads.get(position).getKey());
 
                 Intent i = new Intent(context, DetailActivity.class);

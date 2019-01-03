@@ -8,7 +8,6 @@ import android.support.annotation.NonNull;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.View;
 import android.webkit.MimeTypeMap;
 import android.widget.Button;
@@ -76,7 +75,7 @@ public class DetailActivity extends AppCompatActivity {
             mDocumentKey = bundle.getString("DB_KEY");
 
             upload = new Upload(mProductTitle, subimageURL, mCategoryName, String.valueOf(subprice), mDescription, mWeblink);
-            upload.setUrls(bundle.getStringArrayList("Subcategory_urlList"));
+            upload.setOtherImageURLs(bundle.getStringArrayList("Subcategory_urlList"));
 
             ActionBar actionBar = getSupportActionBar();
             actionBar.setTitle(mProductTitle);

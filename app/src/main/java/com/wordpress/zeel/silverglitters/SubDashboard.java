@@ -7,6 +7,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
+import android.util.Log;
 import android.view.View;
 import android.widget.ProgressBar;
 import android.widget.Toast;
@@ -67,6 +68,8 @@ public class SubDashboard extends AppCompatActivity {
                     Upload upload = snapshot.getValue(Upload.class);
                     upload.setKey(snapshot.getKey());
                     mUploads.add(upload);
+
+                    Log.d("myTag", upload.getName()+ " - " + upload.getOtherImageURLs().size());
                 }
 
                 // updates recyclerView every time there is a change in Database

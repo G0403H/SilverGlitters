@@ -41,9 +41,9 @@
                 android:layout_gravity="bottom"
                 android:padding="10dp"
                 android:id="@+id/indicator"
-                app:fillColor="#ff0099"
-                app:pageColor="#ff0000"
-                app:centered="true"/>
+                app:fillColor="@color/colorAccent"
+                app:pageColor="#2E3B3C"
+                app:centered="true" />
 
             <android.support.v7.widget.Toolbar
                 android:id="@+id/toolbar"

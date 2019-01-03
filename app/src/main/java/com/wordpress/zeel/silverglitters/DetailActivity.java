@@ -62,7 +62,9 @@ public class DetailActivity extends AppCompatActivity {
             ActionBar actionBar = getSupportActionBar();
             actionBar.setTitle(subCategoryName);
 
-            String[] imageUrls = (String[]) list.toArray();
+            String[] imageUrls = new String[list.size()];
+            imageUrls = list.toArray(imageUrls);
+
             ViewPager viewPager = findViewById(R.id.viewPager);
             ViewPageAdapter adapter = new ViewPageAdapter(this,imageUrls);
             viewPager.setAdapter(adapter);

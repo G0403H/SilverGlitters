@@ -15,9 +15,9 @@ public class MainActivity extends AppCompatActivity {
             public void run() {
                 try {
                     // Thread will sleep for x seconds
-                    sleep(5*1000);
+                    sleep(1500);
 
-                    // After 5 seconds redirect to another intent
+                    // After x seconds redirect to another intent
                     Intent i=new Intent(MainActivity.this,LoginActivity.class);
                     startActivity(i);
 
