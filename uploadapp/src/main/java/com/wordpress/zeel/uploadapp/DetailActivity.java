@@ -4,7 +4,9 @@ import android.content.ContentResolver;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.annotation.NonNull;
+import android.support.v4.view.ViewPager;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -13,6 +15,7 @@ import android.webkit.MimeTypeMap;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -21,10 +24,13 @@ import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.OnProgressListener;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.StorageTask;
 import com.google.firebase.storage.UploadTask;
-import com.squareup.picasso.Picasso;
+import com.viewpagerindicator.CirclePageIndicator;
+
+import java.util.ArrayList;
 
 public class DetailActivity extends AppCompatActivity {
     private static final int PICK_IMAGE_REQUEST = 1;
@@ -36,6 +42,7 @@ public class DetailActivity extends AppCompatActivity {
     EditText mEditTextPrice, mEditTextDescription, mEditTextWeblink;
     Button mBtnSavePrice, mBtnSaveDescription, mBtnSaveWeblink,mBtnAdd;
     ImageView mToolbarImage;
+    ProgressBar progressBar;
     private Uri mImageUri;
     private StorageTask mUploadTask;
     private StorageReference mStorageRef;
@@ -53,7 +60,6 @@ public class DetailActivity extends AppCompatActivity {
         mTextViewPrice = findViewById(R.id.text_price);
         mTextViewDescription = findViewById(R.id.text_description);
         mTextViewWeblink = findViewById(R.id.text_link);
-        mToolbarImage = findViewById(R.id.toolbar_image);
         mEditTextPrice = findViewById(R.id.text_price_edit);
         mEditTextDescription = findViewById(R.id.text_description_edit);
         mEditTextWeblink = findViewById(R.id.text_link_edit);
@@ -61,6 +67,7 @@ public class DetailActivity extends AppCompatActivity {
         mBtnSaveDescription = findViewById(R.id.btn_save_description);
         mBtnSaveWeblink = findViewById(R.id.btn_save_weblink);
         mBtnAdd = findViewById(R.id.btn_add);
+        progressBar = findViewById(R.id.progress_bar);
 
         mStorageRef = FirebaseStorage.getInstance().getReference("uploads");
         Bundle bundle = getIntent().getExtras();
@@ -73,19 +80,20 @@ public class DetailActivity extends AppCompatActivity {
             mDescription = bundle.getString("Subcategory_description");
             mWeblink = bundle.getString("Subcategory_weblink");
             mDocumentKey = bundle.getString("DB_KEY");
-
+            ArrayList<String> list = bundle.getStringArrayList("Subcategory_urlList");
             upload = new Upload(mProductTitle, subimageURL, mCategoryName, String.valueOf(subprice), mDescription, mWeblink);
             upload.setOtherImageURLs(bundle.getStringArrayList("Subcategory_urlList"));
-
+            list.add(0, subimageURL);
             ActionBar actionBar = getSupportActionBar();
             actionBar.setTitle(mProductTitle);
+            String[] imageUrls = new String[list.size()];
+            imageUrls = list.toArray(imageUrls);
+            ViewPager viewPager = findViewById(R.id.viewPager);
+            ViewPageAdapter adapter = new ViewPageAdapter(DetailActivity.this,imageUrls);
+            viewPager.setAdapter(adapter);
 
-            Picasso.get()
-                    .load(subimageURL)
-                    .placeholder(R.mipmap.ic_launcher_round)
-                    .fit()
-                    .centerCrop()
-                    .into(mToolbarImage);
+            CirclePageIndicator pageIndicator = findViewById(R.id.indicator);
+            pageIndicator.setViewPager(viewPager);
 
             mTextViewPrice.setText("₹" + String.format("%.2f", subprice));
             mTextViewDescription.setText(mDescription);
@@ -188,7 +196,13 @@ public class DetailActivity extends AppCompatActivity {
                     .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                         @Override
                         public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-
+                            Handler handler = new Handler();
+                            handler.postDelayed(new Runnable() {
+                                @Override
+                                public void run() {
+                                    progressBar.setProgress(0);
+                                }
+                            }, 500);
                             String downloadURL = taskSnapshot.getDownloadUrl().toString();
 //                            Log.d("myTag", downloadURL);
 
@@ -201,6 +215,13 @@ public class DetailActivity extends AppCompatActivity {
                         @Override
                         public void onFailure(@NonNull Exception e) {
                             Toast.makeText(DetailActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
+                        }
+                    })
+                    .addOnProgressListener(new OnProgressListener<UploadTask.TaskSnapshot>() {
+                        @Override
+                        public void onProgress(UploadTask.TaskSnapshot taskSnapshot) {
+                            double progress = (100.0 * taskSnapshot.getBytesTransferred() / taskSnapshot.getTotalByteCount());
+                            progressBar.setProgress((int) progress);
                         }
                     });
 

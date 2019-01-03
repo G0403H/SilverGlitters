@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.util.Log;
@@ -67,6 +66,7 @@ public class SubDashboard extends AppCompatActivity {
                 for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
                     Upload upload = snapshot.getValue(Upload.class);
                     upload.setKey(snapshot.getKey());
+                    //Toast.makeText(SubDashboard.this,""+upload.getOtherImageURLs().size(),Toast.LENGTH_SHORT).show();
                     mUploads.add(upload);
 
                     Log.d("myTag", upload.getName()+ " - " + upload.getOtherImageURLs().size());

@@ -36,6 +36,9 @@ public class Upload {
     }
 
     public ArrayList<String> getOtherImageURLs() {
+        if(this.otherImageURLs==null){
+            this.otherImageURLs = new ArrayList<>();
+        }
         return otherImageURLs;
     }
 
@@ -110,6 +113,5 @@ public class Upload {
     public void setPrice(double price) {
         this.price = price;
     }
-
 
 }
