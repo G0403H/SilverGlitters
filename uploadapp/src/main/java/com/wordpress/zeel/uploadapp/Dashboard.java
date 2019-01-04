@@ -52,6 +52,7 @@ public class Dashboard extends AppCompatActivity implements NavigationView.OnNav
         setSupportActionBar(toolbar);
 
         mProgressCircle = findViewById(R.id.progress_circle);
+
         firebaseAuth = FirebaseAuth.getInstance();
         firebaseAuth.signInAnonymously()
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
@@ -65,6 +66,7 @@ public class Dashboard extends AppCompatActivity implements NavigationView.OnNav
                         }
                     }
                 });
+
         recyclerView = findViewById(R.id.dashboard_recyclerView);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new GridLayoutManager(null, 2));
@@ -116,30 +118,6 @@ public class Dashboard extends AppCompatActivity implements NavigationView.OnNav
         navigationView.setNavigationItemSelectedListener(this);
     }
 
-//    @Override
-//    public boolean onCreateOptionsMenu(Menu menu) {
-//        // Inflate the menu; this adds items to the action bar if it is present.
-//        getMenuInflater().inflate(R.menu.navigation_drawer, menu);
-//        return true;
-//    }
-//
-//    @Override
-//    public boolean onOptionsItemSelected(MenuItem item) {
-//        // Handle action bar item clicks here. The action bar will
-//        // automatically handle clicks on the Home/Up button, so long
-//        // as you specify a parent activity in AndroidManifest.xml.
-//        int id = item.getItemId();
-//
-//        //noinspection SimplifiableIfStatement
-//        if (id == R.id.action_upload) {
-//            Intent intent = new Intent(Dashboard.this,UploadActivity.class);
-//            startActivity(intent);
-//            return true;
-//        }
-//
-//        return super.onOptionsItemSelected(item);
-//    }
-
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
@@ -155,7 +133,6 @@ public class Dashboard extends AppCompatActivity implements NavigationView.OnNav
             intent = new Intent(this, AboutUs.class);
         } else if (id == R.id.menu_logout) {
             // Logout from the system (NOT FOR ADMIN)
-            // intent = new Intent(this, LoginActivity.class);
         }
 
         if (intent != null) {

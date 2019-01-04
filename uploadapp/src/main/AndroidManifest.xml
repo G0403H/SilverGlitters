@@ -5,7 +5,7 @@
     <uses-permission android:name="android.permission.CALL_PHONE" />
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
     <application
         android:allowBackup="true"
@@ -16,24 +16,34 @@
         android:theme="@style/AppTheme">
 
         <activity
-            android:name=".Dashboard"
-            android:theme="@style/AppTheme">
+            android:name=".MainActivity"
+            android:theme="@style/NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <activity
+            android:name=".Dashboard"
+            android:theme="@style/AppTheme" />
         <activity
             android:name=".SubDashboard"
             android:theme="@style/AppTheme2" />
         <activity
             android:name=".DetailActivity"
             android:theme="@style/FullScreenTheme" />
-
-        <activity android:name=".UploadActivity" android:theme="@style/NoActionBar"/>
-        <activity android:name=".AboutUs" android:theme="@style/NoActionBar"/>
-        <activity android:name=".UserActivity" android:theme="@style/AppTheme2" android:label="User Details"></activity>
+        <activity
+            android:name=".UploadActivity"
+            android:theme="@style/NoActionBar" />
+        <activity
+            android:name=".AboutUs"
+            android:theme="@style/NoActionBar" />
+        <activity
+            android:name=".UserActivity"
+            android:label="User Details"
+            android:theme="@style/AppTheme2" />
     </application>
 
 </manifest>
