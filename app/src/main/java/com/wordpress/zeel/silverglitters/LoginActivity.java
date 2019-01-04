@@ -142,7 +142,7 @@ public class LoginActivity extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
-        Toast.makeText(LoginActivity.this,"starting up...",Toast.LENGTH_LONG).show();
+        Toast.makeText(LoginActivity.this,"Starting up...",Toast.LENGTH_LONG).show();
         final ProgressDialog progressDialog = ProgressDialog.show(LoginActivity.this,"Please Wait...","",true);
         final FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
 
