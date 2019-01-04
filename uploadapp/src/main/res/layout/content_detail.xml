@@ -235,8 +235,10 @@
                 android:id="@+id/card_add"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/card_order"
-                android:layout_margin="12dp"
+                android:layout_below="@+id/progress_bar"
+                android:layout_marginLeft="12dp"
+                android:layout_marginRight="12dp"
+                android:layout_marginBottom="12dp"
                 android:padding="6dp"
                 android:background="#2E3B3C"
                 card_view:cardBackgroundColor="#ffffff"
@@ -266,7 +268,7 @@
                 android:layout_height="wrap_content"
                 style="@style/Widget.AppCompat.ProgressBar.Horizontal"
                 android:id="@+id/progress_bar"
-                android:layout_below="@+id/card_add"
+                android:layout_below="@+id/card_order"
                 android:padding="10dp"
                 />
         </RelativeLayout>

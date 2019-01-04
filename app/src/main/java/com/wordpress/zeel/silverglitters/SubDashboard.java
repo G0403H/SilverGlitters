@@ -66,10 +66,7 @@ public class SubDashboard extends AppCompatActivity {
                 for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
                     Upload upload = snapshot.getValue(Upload.class);
                     upload.setKey(snapshot.getKey());
-                    //Toast.makeText(SubDashboard.this,""+upload.getOtherImageURLs().size(),Toast.LENGTH_SHORT).show();
                     mUploads.add(upload);
-
-                    Log.d("myTag", upload.getName()+ " - " + upload.getOtherImageURLs().size());
                 }
 
                 // updates recyclerView every time there is a change in Database

@@ -76,7 +76,7 @@ public class Upload {
 
     public String getWeblink() {
         if (weblink == null)
-            weblink = "Link for the website";
+            weblink = "https://www.silverglitters.com/";
         return weblink;
     }
 

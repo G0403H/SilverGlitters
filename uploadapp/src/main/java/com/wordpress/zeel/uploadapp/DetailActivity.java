@@ -81,13 +81,19 @@ public class DetailActivity extends AppCompatActivity {
             mWeblink = bundle.getString("Subcategory_weblink");
             mDocumentKey = bundle.getString("DB_KEY");
             ArrayList<String> list = bundle.getStringArrayList("Subcategory_urlList");
+
             upload = new Upload(mProductTitle, subimageURL, mCategoryName, String.valueOf(subprice), mDescription, mWeblink);
-            upload.setOtherImageURLs(bundle.getStringArrayList("Subcategory_urlList"));
-            list.add(0, subimageURL);
+            upload.setOtherImageURLs(list);
+
             ActionBar actionBar = getSupportActionBar();
             actionBar.setTitle(mProductTitle);
-            String[] imageUrls = new String[list.size()];
-            imageUrls = list.toArray(imageUrls);
+
+            String[] imageUrls = new String[list.size() + 1];
+            imageUrls[0] = subimageURL;
+            for (int i = 0; i < list.size(); i++) {
+                imageUrls[i + 1] = list.get(i);
+            }
+
             ViewPager viewPager = findViewById(R.id.viewPager);
             ViewPageAdapter adapter = new ViewPageAdapter(DetailActivity.this,imageUrls);
             viewPager.setAdapter(adapter);
@@ -203,8 +209,8 @@ public class DetailActivity extends AppCompatActivity {
                                     progressBar.setProgress(0);
                                 }
                             }, 500);
+
                             String downloadURL = taskSnapshot.getDownloadUrl().toString();
-//                            Log.d("myTag", downloadURL);
 
                             upload.addUrl(downloadURL);
                             mDatabaseRef.setValue(upload);
