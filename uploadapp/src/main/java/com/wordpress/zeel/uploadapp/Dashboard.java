@@ -3,6 +3,7 @@ package com.wordpress.zeel.uploadapp;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
+import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
@@ -11,13 +12,16 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
-import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -36,6 +40,9 @@ public class Dashboard extends AppCompatActivity implements NavigationView.OnNav
     DatabaseReference mDatabaseRef;
     ValueEventListener mDBListener;
     List<Upload> mUploads;
+    private FirebaseAuth firebaseAuth;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,7 +52,19 @@ public class Dashboard extends AppCompatActivity implements NavigationView.OnNav
         setSupportActionBar(toolbar);
 
         mProgressCircle = findViewById(R.id.progress_circle);
-
+        firebaseAuth = FirebaseAuth.getInstance();
+        firebaseAuth.signInAnonymously()
+                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<AuthResult> task) {
+                        if(task.isSuccessful()){
+                            FirebaseUser user = firebaseAuth.getCurrentUser();
+                        }
+                        else {
+                            Toast.makeText(Dashboard.this,"Authentication failed",Toast.LENGTH_LONG).show();
+                        }
+                    }
+                });
         recyclerView = findViewById(R.id.dashboard_recyclerView);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new GridLayoutManager(null, 2));
